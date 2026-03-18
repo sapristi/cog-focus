@@ -1,5 +1,5 @@
-# Scenario Calibration
 <!-- L0: Prediction accuracy tracker for decision scenarios -->
+# Scenario Calibration
 
 <!-- Updated by /reflect when scenarios resolve. -->
 
