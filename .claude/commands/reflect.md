@@ -20,6 +20,7 @@ grep -c "^- " memory/observations.md memory/action-items.md 2>/dev/null
 
 Read on activation:
 - `goal.md` (success criteria for progress check)
+- `roadmap.md` (active milestone and completed milestones)
 - `memory/reflect-cursor.md` (session path + cursor)
 - `memory/observations.md`
 - `memory/patterns.md`
@@ -56,12 +57,21 @@ Check if findings are already captured:
 
 **Consistency check**: Read `hot-memory.md`. For factual claims, verify against source files. Fix hot-memory if stale.
 
-### 3. Goal Progress Assessment
+### 3. Milestone & Goal Progress Assessment
 
-Read `goal.md` "Success Looks Like" criteria. For each criterion:
-- Check observations and action-items for evidence of progress
+**Active milestone** (from `roadmap.md`):
+- Is the current approach working? Rate: **on track** / **stalled** / **blocked**
+- If stalled: suggest concrete next action or milestone revision
+- If the milestone seems done: flag it for completion and suggest promoting the next one
+
+**Goal-level check** (from `goal.md` "Success Looks Like"):
+- For each criterion, check observations for evidence of progress
 - Rate: **on track** / **stalled** / **no signal**
-- Note blockers or next actions needed
+- Flag if work has drifted away from the goal — milestones should serve it
+
+**Roadmap health**:
+- Are upcoming milestones still the right next steps given what you've learned?
+- Suggest reordering, splitting, or adding milestones if evidence supports it
 
 Report progress honestly. If there's no evidence of movement, say so.
 
@@ -99,6 +109,7 @@ Don't just log — *fix things*.
 ### 8. Debrief
 
 Compose a concise summary:
+- *Milestone progress* — active milestone status + any suggested changes
 - *Goal progress* — status per success criterion
 - *What I learned* — new patterns and insights
 - *What I fixed* — memory gaps filled, corrections made

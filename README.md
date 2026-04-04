@@ -12,12 +12,13 @@ cd my-project
 ```
 
 1. Edit `goal.md` — define what you're trying to accomplish
-2. Open in Claude Code
-3. Start working
+2. Edit `roadmap.md` — break the goal into milestones
+3. Open in Claude Code
+4. Start working
 
 ## How It Works
 
-`CLAUDE.md` teaches Claude Code to maintain persistent memory across sessions. Everything serves the goal you define in `goal.md`.
+`CLAUDE.md` teaches Claude Code to maintain persistent memory across sessions. `goal.md` is the north star; `roadmap.md` breaks it into milestones you work through one at a time.
 
 ### Memory
 
@@ -42,11 +43,15 @@ memory/
 
 When a topic comes up 3+ times across observations, raise it into a **thread** — a synthesis file in `memory/` with Current State / Timeline / Insights sections. One file per topic, forever.
 
+### Roadmap
+
+`roadmap.md` decomposes the goal into milestones — stepping stones you work through iteratively. Active milestone drives daily work; completed milestones record what you learned. The path is non-linear: milestones get revised, reordered, and added as you learn.
+
 ## Design Principles
 
-- **One goal** — everything serves it. No multi-domain routing.
+- **One goal, many milestones** — the goal is stable; the path to it evolves.
 - **Plain text** — markdown files, grep-friendly, git-trackable.
-- **Flat structure** — 5 core files, no nesting.
+- **Flat structure** — core files at root and in `memory/`, no nesting.
 - **Progressive condensation** — observations → patterns → hot-memory.
 
 ## License

@@ -17,7 +17,3 @@
 ## Constraints
 <!-- Time, resources, scope limits. What are you NOT doing? -->
 -
-
-## Current Phase
-<!-- Where are you right now? Update this as you progress. -->
-
