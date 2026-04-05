@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Check if the current project has opted into cog-focus
+settings_file=".claude/settings.json"
+
+if [ ! -f "$settings_file" ]; then
+  exit 0
+fi
+
+# Lightweight check — no jq dependency
+# Look for "cog-focus" block containing "enabled" near "true"
+if ! grep -q '"cog-focus"' "$settings_file"; then
+  exit 0
+fi
+
+# Extract the cog-focus block and check for enabled: true
+# Use awk to grab lines between "cog-focus" and the next top-level closing brace
+if ! awk '/"cog-focus"/,/\}/' "$settings_file" | grep -q '"enabled".*true'; then
+  exit 0
+fi
+
+# Project has cog-focus enabled — inject instructions
+instructions='# Cog Focus — Active Project
+
+## On Session Start
+Read these files in order:
+1. `goal.md` — north star
+2. `roadmap.md` — active milestone
+3. `memory/hot-memory.md` — current state
+4. `memory/patterns.md` — learned heuristics
+
+## Memory File Map
+memory/
+  hot-memory.md         # <50 lines, rewrite freely
+  observations.md       # Append-only: - YYYY-MM-DD [tags]: observation
+  action-items.md       # - [ ] task | due: | pri: | added:
+  patterns.md           # <50 lines, edit in place
+  archive/              # Old data, managed by /housekeeping
+
+## Edit Patterns
+| File | Pattern |
+|------|---------|
+| hot-memory.md | Rewrite freely |
+| observations.md | Append only |
+| action-items.md | Append new, check off done |
+| patterns.md | Edit in place |
+
+## Behavior
+- Orient work toward the **active milestone**, not directly toward the goal.
+- Write observations immediately — do not wait.
+- Challenge when work does not serve the active milestone.
+- When a milestone completes, move it to Completed in roadmap.md with date + takeaway.'
+
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+escaped=$(escape_for_json "$instructions")
+
+# Platform detection - use printf (not heredoc) to avoid bash 5.3+ hang
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "additional_context": "%s"\n}\n' "$escaped"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$escaped"
+else
+  printf '{\n  "additionalContext": "%s"\n}\n' "$escaped"
+fi
+
+exit 0
