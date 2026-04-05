@@ -4,11 +4,36 @@ A single-goal cognitive architecture for Claude Code. Install the plugin, initia
 
 Inspired by [Cog](https://github.com/marciopuga/cog) — simplified from multi-domain to single-goal.
 
+## Installation
+
+### From GitHub
+
+Add this repo as a marketplace, then install the plugin:
+
+```bash
+claude plugin marketplace add sapristi/cog-focus
+claude plugin install cog-focus@cog-focus-marketplace
+```
+
+### From a local clone
+
+```bash
+git clone https://github.com/sapristi/cog-focus.git
+claude plugin marketplace add /path/to/cog-focus
+claude plugin install cog-focus@cog-focus-marketplace
+```
+
+### Verify
+
+```bash
+claude plugin list
+```
+
+You should see `cog-focus` in the output. Restart Claude Code to activate the plugin.
+
 ## Quick Start
 
-Install the cog-focus plugin in Claude Code.
-
-Then in any project directory, run `/cog-init`. It will scaffold all the files and enable cog-focus for the project.
+In any project directory, run `/cog-init`. It will scaffold all the files and enable cog-focus for the project.
 
 ### Then
 

@@ -1,0 +1,17 @@
+{
+  "name": "cog-focus-marketplace",
+  "metadata": {
+    "description": "Single-goal cognitive architecture with persistent memory and structured reflection"
+  },
+  "owner": {
+    "name": "Mathias Millet"
+  },
+  "plugins": [
+    {
+      "name": "cog-focus",
+      "source": "./",
+      "description": "Single-goal cognitive architecture with persistent memory and structured reflection",
+      "version": "1.0.0"
+    }
+  ]
+}
