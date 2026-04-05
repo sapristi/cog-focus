@@ -4,13 +4,16 @@ This is the cog_focus framework repository. The goal here is to develop and impr
 
 ## Structure
 
-- `template/` — the files that get copied when a user runs `cog-init`. This is the product.
-- `bin/cog-init` — the init script users run to scaffold a new project.
-- `README.md` — user-facing documentation.
+- `skills/` — plugin skills (cog-init, reflect, housekeeping)
+- `hooks/` — session-start hook that injects instructions for enabled projects
+- `template/` — raw files copied by `/cog-init` into user projects
+- `README.md` — user-facing documentation
+- `.claude-plugin/plugin.json` — plugin manifest
 
 ## Rules
 
+- Skills live in `skills/`. Edit them there.
 - Template files live in `template/`. Edit them there.
+- Hook script lives in `hooks/`.
 - Don't use the memory system or goal/roadmap files at the root — those only exist inside `template/`.
-- The root `CLAUDE.md` (this file) is for framework development. The `template/CLAUDE.md` is what end users get.
-- Keep the template minimal and convention-based. Avoid feature creep.
+- Keep the plugin minimal and convention-based. Avoid feature creep.

@@ -1,41 +1,28 @@
 # Cog Focus
 
-A single-goal cognitive architecture for Claude Code. Initialize a project, define your goal, start working. Claude maintains persistent memory focused on that one goal.
+A single-goal cognitive architecture for Claude Code. Install the plugin, initialize a project, define your goal, start working. Claude maintains persistent memory focused on that one goal.
 
 Inspired by [Cog](https://github.com/marciopuga/cog) — simplified from multi-domain to single-goal.
 
 ## Quick Start
 
-### Option A: Claude Code command (recommended)
+Install the cog-focus plugin in Claude Code.
 
-Copy `cog-init.md` to your global Claude commands directory:
-
-```bash
-cp cog-init.md ~/.claude/commands/cog-init.md
-```
-
-Then in any project directory, run the `/cog-init` slash command inside Claude Code. It will scaffold all the files and create an initial commit.
-
-### Option B: Shell script
-
-```bash
-# Clone the framework
-git clone <this-repo>
-
-# Initialize a new project
-./cog_focus/bin/cog-init ~/dev/my-project
-```
+Then in any project directory, run `/cog-init`. It will scaffold all the files and enable cog-focus for the project.
 
 ### Then
 
 1. Edit `goal.md` — define what you're trying to accomplish
 2. Edit `roadmap.md` — break the goal into milestones
-3. Open in Claude Code
-4. Start working
+3. Start working
 
 ## How It Works
 
-`CLAUDE.md` teaches Claude Code to maintain persistent memory across sessions. `goal.md` is the north star; `roadmap.md` breaks it into milestones you work through one at a time.
+Installing the plugin adds three skills and a session-start hook.
+
+`/cog-init` scaffolds the memory files in your project and sets `"cog-focus": { "enabled": true }` in `.claude/settings.json`.
+
+The session-start hook detects that setting and injects the memory system instructions for the session. Claude then reads `goal.md`, `roadmap.md`, and the memory files at the start of each session, maintaining continuity across conversations.
 
 ### Memory
 
@@ -52,9 +39,9 @@ memory/
 
 | Skill | What it does |
 |-------|-------------|
+| `/cog-init` | Scaffold goal, roadmap, and memory files in the current project |
 | `/reflect` | Review sessions, check goal progress, condense patterns |
 | `/housekeeping` | Archive old data, prune hot-memory, surface stale items |
-| `/commit` | Git commit with conventional format |
 
 ### Threads
 
@@ -70,6 +57,20 @@ When a topic comes up 3+ times across observations, raise it into a **thread** �
 - **Plain text** — markdown files, grep-friendly, git-trackable.
 - **Flat structure** — core files at root and in `memory/`, no nesting.
 - **Progressive condensation** — observations → patterns → hot-memory.
+
+## Opt-In Per Project
+
+Cog Focus is enabled per-project via `.claude/settings.json`:
+
+```json
+{
+  "cog-focus": {
+    "enabled": true
+  }
+}
+```
+
+This is set automatically by `/cog-init`. The session-start hook only activates for projects where this is set.
 
 ## License
 
