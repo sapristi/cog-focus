@@ -1,14 +1,19 @@
 # Cog Focus
 
-A single-goal cognitive architecture for Claude Code. Clone this template, define your goal, start working. Claude maintains persistent memory focused on that one goal.
+A single-goal cognitive architecture for Claude Code. Initialize a project, define your goal, start working. Claude maintains persistent memory focused on that one goal.
 
 Inspired by [Cog](https://github.com/marciopuga/cog) — simplified from multi-domain to single-goal.
 
 ## Quick Start
 
 ```bash
-git clone <this-repo> my-project
-cd my-project
+# Clone the framework
+git clone <this-repo>
+
+# Initialize a new project
+./cog_focus/bin/cog-init ~/dev/my-project
+
+# Or add cog-init to your PATH for convenience
 ```
 
 1. Edit `goal.md` — define what you're trying to accomplish

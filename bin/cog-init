@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "Usage: cog-init <target-directory>"
+  echo ""
+  echo "Initialize a new Cog Focus project."
+  echo "Copies the template files and initializes a fresh git repo."
+  exit 1
+}
+
+if [ $# -ne 1 ]; then
+  usage
+fi
+
+TARGET="$1"
+
+if [ -e "$TARGET" ]; then
+  echo "Error: $TARGET already exists." >&2
+  exit 1
+fi
+
+# Find the template directory relative to this script
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+TEMPLATE_DIR="$SCRIPT_DIR/../template"
+
+if [ ! -d "$TEMPLATE_DIR" ]; then
+  echo "Error: template directory not found at $TEMPLATE_DIR" >&2
+  exit 1
+fi
+
+# Copy template to target
+cp -r "$TEMPLATE_DIR" "$TARGET"
+
+# Initialize git repo
+git -C "$TARGET" init -q
+
+echo "Initialized Cog Focus project at $TARGET"
+echo ""
+echo "Next steps:"
+echo "  cd $TARGET"
+echo "  Edit goal.md    — define what you're trying to accomplish"
+echo "  Edit roadmap.md — break the goal into milestones"
+echo "  Open in Claude Code and start working"
