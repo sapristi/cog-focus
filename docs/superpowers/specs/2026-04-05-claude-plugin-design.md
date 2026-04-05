@@ -152,7 +152,7 @@ description: Deep self-reflection — mines sessions, condenses patterns, checks
 user-invocable: true
 ```
 
-**Guard:** Check `.claude/settings.json` for `"cog-focus": { "enabled": true }`. If not found, tell the user to run `/cog-init` first and stop.
+**Guard:** Check `.claude/settings.json` for `"cog-focus": { "enabled": true }`. If not found, warn the user that this skill is meant for repositories where cog-focus is enabled, point them to `/cog-init` to set it up, and stop.
 
 **Process** (carried from current `template/.claude/commands/reflect.md`):
 1. Orientation — check recent memory file changes and entry counts
@@ -181,7 +181,7 @@ description: Memory maintenance — archives old data, prunes hot-memory, surfac
 user-invocable: true
 ```
 
-**Guard:** Check `.claude/settings.json` for `"cog-focus": { "enabled": true }`. If not found, tell the user to run `/cog-init` first and stop.
+**Guard:** Check `.claude/settings.json` for `"cog-focus": { "enabled": true }`. If not found, warn the user that this skill is meant for repositories where cog-focus is enabled, point them to `/cog-init` to set it up, and stop.
 
 **Process** (carried from current `template/.claude/commands/housekeeping.md`):
 1. Orientation — check entry counts against thresholds
