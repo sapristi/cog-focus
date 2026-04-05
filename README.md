@@ -33,13 +33,7 @@ You should see `cog-focus` in the output. Restart Claude Code to activate the pl
 
 ## Quick Start
 
-In any project directory, run `/cog-init`. It will scaffold all the files and enable cog-focus for the project.
-
-### Then
-
-1. Edit `goal.md` — define what you're trying to accomplish
-2. Edit `roadmap.md` — break the goal into milestones
-3. Start working
+In any project directory, run `/cog-init`. It will scaffold the memory files, then walk you through defining your goal and first milestones interactively. Once done, start working.
 
 ## How It Works
 
@@ -64,7 +58,7 @@ memory/
 
 | Skill | What it does |
 |-------|-------------|
-| `/cog-init` | Scaffold goal, roadmap, and memory files in the current project |
+| `/cog-init` | Scaffold files, then interactively define your goal and first milestones |
 | `/reflect` | Review sessions, check goal progress, condense patterns |
 | `/housekeeping` | Archive old data, prune hot-memory, surface stale items |
 

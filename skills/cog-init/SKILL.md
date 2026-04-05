@@ -32,17 +32,38 @@ Check if `.claude/settings.json` exists.
 - If it does not exist: create the `.claude/` directory and write `{ "cog-focus": { "enabled": true } }` to `.claude/settings.json`.
 - If it exists: read it, merge `"cog-focus": { "enabled": true }` into the top-level JSON object, and write the file back, preserving all existing settings.
 
-## 5. Git commit
+## 5. Define the goal
 
-Stage the new files and commit:
+Tell the user the scaffolding is done, then help them define their goal through a short conversation. Ask these questions one at a time, waiting for the user's answer before continuing:
+
+1. **"What are you trying to accomplish?"** — Get a one-sentence goal.
+2. **"Why does this matter? What changes when you succeed?"** — Get the motivation.
+3. **"How will you know you're done? Give me 3-5 concrete criteria."** — Get success criteria.
+4. **"Any constraints — time, scope, things you're explicitly NOT doing?"** — Get constraints.
+
+After collecting all answers, write `goal.md` with the user's responses filled into the template sections (What, Why, Success Looks Like, Constraints). Show the user the result and ask if it looks right. Revise if needed.
+
+## 6. Define the first milestones
+
+Now help the user break the goal into milestones:
+
+1. **"What's the first concrete step toward this goal?"** — This becomes the active milestone. Ask follow-ups to fill in the objective, open questions, and approach.
+2. **"What comes after that? List 2-4 upcoming milestones — rough guesses are fine."** — These become the Upcoming section.
+
+Write `roadmap.md` with the active milestone filled in and the upcoming milestones listed. Show the user the result and ask if it looks right. Revise if needed.
+
+## 7. Git commit
+
+Stage all files and commit:
 
 ```
 git add goal.md roadmap.md .gitignore memory/ .claude/settings.json
 git commit -m "chore: initialize cog focus project"
 ```
 
-## 6. Report
+## 8. Report
 
-Tell the user which files were created and that `.claude/settings.json` was updated. End with:
-
-"Cog Focus initialized. Edit `goal.md` to define your goal, then `roadmap.md` to set your first milestone."
+Tell the user Cog Focus is initialized and ready. Mention that:
+- The session-start hook will now activate for this project
+- They can run `/reflect` to review progress and `/housekeeping` to maintain memory files
+- Goal and roadmap can always be edited directly as they learn more
