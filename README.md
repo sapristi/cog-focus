@@ -39,14 +39,14 @@ In any project directory, run `/cog-init`. It will scaffold the memory files, th
 
 Installing the plugin adds three skills and a session-start hook.
 
-`/cog-init` scaffolds `goal.md`, `roadmap.md`, and the `memory/` directory in your project, then walks you through defining your goal and first milestones.
+`/cog-init` scaffolds `goal.md`, `roadmap.md`, `.cog-focus.yaml`, and the `.memory/` directory in your project, then walks you through defining your goal and first milestones.
 
-The session-start hook detects these files (`goal.md` + `memory/`) and injects the memory system instructions for the session. Claude then reads `goal.md`, `roadmap.md`, and the memory files at the start of each session, maintaining continuity across conversations.
+The session-start hook detects `.cog-focus.yaml` and injects the memory system instructions for the session. Claude then reads `goal.md`, `roadmap.md`, and the memory files at the start of each session, maintaining continuity across conversations.
 
 ### Memory
 
 ```
-memory/
+.memory/
   hot-memory.md       # What matters right now (<50 lines)
   observations.md     # Event log (append-only)
   action-items.md     # Tasks serving the goal
@@ -64,7 +64,7 @@ memory/
 
 ### Threads
 
-When a topic comes up 3+ times across observations, raise it into a **thread** — a synthesis file in `memory/` with Current State / Timeline / Insights sections. One file per topic, forever.
+When a topic comes up 3+ times across observations, raise it into a **thread** — a synthesis file in `.memory/` with Current State / Timeline / Insights sections. One file per topic, forever.
 
 ### Roadmap
 
@@ -74,12 +74,12 @@ When a topic comes up 3+ times across observations, raise it into a **thread** �
 
 - **One goal, many milestones** — the goal is stable; the path to it evolves.
 - **Plain text** — markdown files, grep-friendly, git-trackable.
-- **Flat structure** — core files at root and in `memory/`, no nesting.
+- **Flat structure** — core files at root and in `.memory/`, no nesting.
 - **Progressive condensation** — observations → patterns → hot-memory.
 
 ## Opt-In Per Project
 
-Cog Focus activates per-project by detecting the files created by `/cog-init` — specifically `goal.md` and `memory/` in the project root. No settings flag needed.
+Cog Focus activates per-project by detecting `.cog-focus.yaml` in the project root, created by `/cog-init`.
 
 ## License
 

@@ -5,8 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Check if the current project has been initialized with cog-focus
-# Detection: goal.md and memory/ must both exist (created by /cog-init)
-if [ ! -f "goal.md" ] || [ ! -d "memory" ]; then
+if [ ! -f ".cog-focus.yaml" ]; then
   exit 0
 fi
 
@@ -17,11 +16,11 @@ instructions='# Cog Focus — Active Project
 Read these files in order:
 1. `goal.md` — north star
 2. `roadmap.md` — active milestone
-3. `memory/hot-memory.md` — current state
-4. `memory/patterns.md` — learned heuristics
+3. `.memory/hot-memory.md` — current state
+4. `.memory/patterns.md` — learned heuristics
 
 ## Memory File Map
-memory/
+.memory/
   hot-memory.md         # <50 lines, rewrite freely
   observations.md       # Append-only: - YYYY-MM-DD [tags]: observation
   action-items.md       # - [ ] task | due: | pri: | added:

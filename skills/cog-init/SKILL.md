@@ -8,7 +8,7 @@ Initialize a Cog Focus project in the current working directory. Follow these st
 
 ## 1. Guard
 
-Check if `goal.md` or `memory/` already exist in the current directory. If either exists, warn the user and ask whether to overwrite, skip existing files, or abort. Do not proceed until the user responds.
+Check if `.cog-focus.yaml` already exists in the current directory. If it does, warn the user that cog-focus is already initialized and ask whether to reinitialize (overwrite) or abort. Do not proceed until the user responds.
 
 ## 2. Git check
 
@@ -16,11 +16,11 @@ Run `git rev-parse --is-inside-work-tree` in the current directory. If the comma
 
 ## 3. Copy template files
 
-Run the following two commands to copy template files into the current directory:
+Run the following commands to copy template files into the current directory:
 
 ```
-cp -r "${CLAUDE_PLUGIN_ROOT}/template/goal.md" "${CLAUDE_PLUGIN_ROOT}/template/roadmap.md" "${CLAUDE_PLUGIN_ROOT}/template/.gitignore" .
-cp -r "${CLAUDE_PLUGIN_ROOT}/template/memory" .
+cp "${CLAUDE_PLUGIN_ROOT}/template/.cog-focus.yaml" "${CLAUDE_PLUGIN_ROOT}/template/goal.md" "${CLAUDE_PLUGIN_ROOT}/template/roadmap.md" "${CLAUDE_PLUGIN_ROOT}/template/.gitignore" .
+cp -r "${CLAUDE_PLUGIN_ROOT}/template/.memory" .
 ```
 
 `CLAUDE_PLUGIN_ROOT` is an environment variable set by Claude Code pointing to the plugin's install directory.
@@ -50,7 +50,7 @@ Write `roadmap.md` with the active milestone filled in and the upcoming mileston
 Stage all files and commit:
 
 ```
-git add goal.md roadmap.md .gitignore memory/
+git add .cog-focus.yaml goal.md roadmap.md .gitignore .memory/
 git commit -m "chore: initialize cog focus project"
 ```
 
