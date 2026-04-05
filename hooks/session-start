@@ -9,6 +9,33 @@ if [ ! -f ".cog-focus.yaml" ]; then
   exit 0
 fi
 
+# Check if reflect/housekeeping are overdue (>7 days or never)
+stale_nudges=""
+
+check_staleness() {
+  local label="$1" command="$2" key="$3"
+  local value
+  value=$(grep "^${key}:" .cog-focus.yaml 2>/dev/null | sed 's/^[^:]*: *//' | tr -d '[:space:]')
+  if [ -z "$value" ] || [ "$value" = "never" ]; then
+    stale_nudges="${stale_nudges}
+- **${label}** has never been run. Suggest the user runs \`/${command}\`."
+  else
+    # Compare dates — extract YYYY-MM-DD portion
+    local last_date="${value:0:10}"
+    local now_epoch last_epoch
+    now_epoch=$(date +%s)
+    last_epoch=$(date -d "$last_date" +%s 2>/dev/null) || last_epoch=0
+    local age_days=$(( (now_epoch - last_epoch) / 86400 ))
+    if [ "$age_days" -ge 7 ]; then
+      stale_nudges="${stale_nudges}
+- **${label}** last ran ${age_days} days ago (${last_date}). Suggest the user runs \`/${command}\`."
+    fi
+  fi
+}
+
+check_staleness "Reflect" "reflect" "last_reflect"
+check_staleness "Housekeeping" "housekeeping" "last_housekeeping"
+
 # Project has cog-focus enabled — inject instructions
 instructions='# Cog Focus — Active Project
 
@@ -50,6 +77,14 @@ escape_for_json() {
     s="${s//$'\t'/\\t}"
     printf '%s' "$s"
 }
+
+# Append staleness nudges if any
+if [ -n "$stale_nudges" ]; then
+  instructions="${instructions}
+
+## Maintenance Overdue
+$stale_nudges"
+fi
 
 escaped=$(escape_for_json "$instructions")
 
