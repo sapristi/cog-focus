@@ -1,0 +1,9 @@
+{
+  "name": "cog-focus",
+  "description": "Single-goal cognitive architecture with persistent memory and structured reflection",
+  "version": "1.0.0",
+  "author": {
+    "name": "Mathias Millet"
+  },
+  "license": "MIT"
+}
