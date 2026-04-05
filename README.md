@@ -39,9 +39,9 @@ In any project directory, run `/cog-init`. It will scaffold the memory files, th
 
 Installing the plugin adds three skills and a session-start hook.
 
-`/cog-init` scaffolds the memory files in your project and sets `"cog-focus": { "enabled": true }` in `.claude/settings.json`.
+`/cog-init` scaffolds `goal.md`, `roadmap.md`, and the `memory/` directory in your project, then walks you through defining your goal and first milestones.
 
-The session-start hook detects that setting and injects the memory system instructions for the session. Claude then reads `goal.md`, `roadmap.md`, and the memory files at the start of each session, maintaining continuity across conversations.
+The session-start hook detects these files (`goal.md` + `memory/`) and injects the memory system instructions for the session. Claude then reads `goal.md`, `roadmap.md`, and the memory files at the start of each session, maintaining continuity across conversations.
 
 ### Memory
 
@@ -79,17 +79,7 @@ When a topic comes up 3+ times across observations, raise it into a **thread** â
 
 ## Opt-In Per Project
 
-Cog Focus is enabled per-project via `.claude/settings.json`:
-
-```json
-{
-  "cog-focus": {
-    "enabled": true
-  }
-}
-```
-
-This is set automatically by `/cog-init`. The session-start hook only activates for projects where this is set.
+Cog Focus activates per-project by detecting the files created by `/cog-init` â€” specifically `goal.md` and `memory/` in the project root. No settings flag needed.
 
 ## License
 

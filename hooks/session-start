@@ -4,22 +4,9 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-# Check if the current project has opted into cog-focus
-settings_file=".claude/settings.json"
-
-if [ ! -f "$settings_file" ]; then
-  exit 0
-fi
-
-# Lightweight check — no jq dependency
-# Look for "cog-focus" block containing "enabled" near "true"
-if ! grep -q '"cog-focus"' "$settings_file"; then
-  exit 0
-fi
-
-# Extract the cog-focus block and check for enabled: true
-# Use awk to grab lines between "cog-focus" and the next top-level closing brace
-if ! awk '/"cog-focus"/,/\}/' "$settings_file" | grep -q '"enabled".*true'; then
+# Check if the current project has been initialized with cog-focus
+# Detection: goal.md and memory/ must both exist (created by /cog-init)
+if [ ! -f "goal.md" ] || [ ! -d "memory" ]; then
   exit 0
 fi
 

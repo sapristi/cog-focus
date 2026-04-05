@@ -25,14 +25,7 @@ cp -r "${CLAUDE_PLUGIN_ROOT}/template/memory" .
 
 `CLAUDE_PLUGIN_ROOT` is an environment variable set by Claude Code pointing to the plugin's install directory.
 
-## 4. Enable cog-focus in settings
-
-Check if `.claude/settings.json` exists.
-
-- If it does not exist: create the `.claude/` directory and write `{ "cog-focus": { "enabled": true } }` to `.claude/settings.json`.
-- If it exists: read it, merge `"cog-focus": { "enabled": true }` into the top-level JSON object, and write the file back, preserving all existing settings.
-
-## 5. Define the goal
+## 4. Define the goal
 
 Tell the user the scaffolding is done, then help them define their goal through a short conversation. Ask these questions one at a time, waiting for the user's answer before continuing:
 
@@ -43,7 +36,7 @@ Tell the user the scaffolding is done, then help them define their goal through 
 
 After collecting all answers, write `goal.md` with the user's responses filled into the template sections (What, Why, Success Looks Like, Constraints). Show the user the result and ask if it looks right. Revise if needed.
 
-## 6. Define the first milestones
+## 5. Define the first milestones
 
 Now help the user break the goal into milestones:
 
@@ -52,16 +45,16 @@ Now help the user break the goal into milestones:
 
 Write `roadmap.md` with the active milestone filled in and the upcoming milestones listed. Show the user the result and ask if it looks right. Revise if needed.
 
-## 7. Git commit
+## 6. Git commit
 
 Stage all files and commit:
 
 ```
-git add goal.md roadmap.md .gitignore memory/ .claude/settings.json
+git add goal.md roadmap.md .gitignore memory/
 git commit -m "chore: initialize cog focus project"
 ```
 
-## 8. Report
+## 7. Report
 
 Tell the user Cog Focus is initialized and ready. Mention that:
 - The session-start hook will now activate for this project
