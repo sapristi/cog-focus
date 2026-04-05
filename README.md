@@ -6,15 +6,27 @@ Inspired by [Cog](https://github.com/marciopuga/cog) — simplified from multi-d
 
 ## Quick Start
 
+### Option A: Claude Code command (recommended)
+
+Copy `cog-init.md` to your global Claude commands directory:
+
+```bash
+cp cog-init.md ~/.claude/commands/cog-init.md
+```
+
+Then in any project directory, run the `/cog-init` slash command inside Claude Code. It will scaffold all the files and create an initial commit.
+
+### Option B: Shell script
+
 ```bash
 # Clone the framework
 git clone <this-repo>
 
 # Initialize a new project
 ./cog_focus/bin/cog-init ~/dev/my-project
-
-# Or add cog-init to your PATH for convenience
 ```
+
+### Then
 
 1. Edit `goal.md` — define what you're trying to accomplish
 2. Edit `roadmap.md` — break the goal into milestones
