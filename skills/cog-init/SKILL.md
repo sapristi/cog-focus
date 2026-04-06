@@ -16,12 +16,12 @@ Run `git rev-parse --is-inside-work-tree` in the current directory. If the comma
 
 ## 3. Copy template files
 
-Before copying, check which of the following already exist in the current directory: `.cog-focus.yaml`, `goal.md`, `roadmap.md`, `.gitignore`, `.memory/`. If any exist, list them and ask the user whether to overwrite or skip each one. Do not overwrite without explicit confirmation.
+Before copying, check which of the following already exist in the current directory: `.cog-focus.yaml`, `goal.md`, `roadmap.md`, `.memory/`. If any exist, list them and ask the user whether to overwrite or skip each one. Do not overwrite without explicit confirmation.
 
 Then copy the confirmed files from the template directory:
 
 ```
-cp "${CLAUDE_PLUGIN_ROOT}/template/.cog-focus.yaml" "${CLAUDE_PLUGIN_ROOT}/template/goal.md" "${CLAUDE_PLUGIN_ROOT}/template/roadmap.md" "${CLAUDE_PLUGIN_ROOT}/template/.gitignore" .
+cp "${CLAUDE_PLUGIN_ROOT}/template/.cog-focus.yaml" "${CLAUDE_PLUGIN_ROOT}/template/goal.md" "${CLAUDE_PLUGIN_ROOT}/template/roadmap.md" .
 cp -r "${CLAUDE_PLUGIN_ROOT}/template/.memory" .
 ```
 
