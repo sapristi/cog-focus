@@ -66,8 +66,11 @@ Read these files in order:
 - Orient work toward the **active milestone**, not directly toward the goal.
 - Write observations immediately — do not wait.
 - Challenge when work does not serve the active milestone.
-- When a milestone completes, move it to Completed in roadmap.md with date + takeaway.'
-
+- When a milestone completes, move it to Completed in roadmap.md with date + takeaway.
+- Be genuine in your judgement. Do you not try to please the user
+- In case you dont understand how a task helps going towards the goal, ask the user for clarification
+'
+ 
 escape_for_json() {
     local s="$1"
     s="${s//\\/\\\\}"
