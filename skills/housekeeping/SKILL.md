@@ -6,7 +6,7 @@ user-invocable: true
 
 ## Guard
 
-Check if `.cog-focus.yaml` exists in the current directory. If it does not, tell the user:
+Check if `cog-focus/config.yaml` exists in the current directory. If it does not, tell the user:
 
 "This project doesn't have cog-focus enabled. Run `/cog-init` to set it up."
 
@@ -18,26 +18,26 @@ Use this skill to perform memory housekeeping. Trigger if the user says "houseke
 
 ```bash
 # What changed since last run?
-find .memory/ -type f -name "*.md" -mtime -1 | sort
+find cog-focus/memory/ -type f -name "*.md" -mtime -1 | sort
 
 # Entry counts for archival threshold (>50 observations, >10 done items)
-grep -c "^- " .memory/observations.md 2>/dev/null
-grep -c "^\- \[x\]" .memory/action-items.md 2>/dev/null
+grep -c "^- " cog-focus/memory/observations.md 2>/dev/null
+grep -c "^\- \[x\]" cog-focus/memory/action-items.md 2>/dev/null
 ```
 
 Only read files that need work based on these results.
 
 ## 1. Archive Stale Data
 
-**Observations**: If `.memory/observations.md` has >50 entries, move oldest entries to `.memory/archive/observations-YYYY.md` (grouped by year). Keep the 30 most recent in the main file.
+**Observations**: If `cog-focus/memory/observations.md` has >50 entries, move oldest entries to `cog-focus/memory/archive/observations-YYYY.md` (grouped by year). Keep the 30 most recent in the main file.
 
-**Action items**: If `.memory/action-items.md` has >10 completed items, move them to `.memory/archive/action-items-done.md`.
+**Action items**: If `cog-focus/memory/action-items.md` has >10 completed items, move them to `cog-focus/memory/archive/action-items-done.md`.
 
 When appending to an existing archive file, add to the end. When creating a new one, add a title header.
 
 ## 2. Prune Hot Memory
 
-Keep `.memory/hot-memory.md` under 50 lines. Pruning priority:
+Keep `cog-focus/memory/hot-memory.md` under 50 lines. Pruning priority:
 
 1. **Resolved items** — anything with ~~strikethrough~~, "DONE", "RESOLVED"
 2. **Past events** — entries about dates that have already occurred
@@ -51,13 +51,13 @@ Where trimmed entries go:
 
 ## 3. Surface Stale Action Items
 
-Review `.memory/action-items.md`:
+Review `cog-focus/memory/action-items.md`:
 - **Stale items** (open >2 weeks): list with age and suggest next action
 - Be direct. Recommend specific actions.
 
 ## 4. Rebuild Archive Index
 
-Scan `.memory/archive/*.md` files. Write to `.memory/archive/index.md`:
+Scan `cog-focus/memory/archive/*.md` files. Write to `cog-focus/memory/archive/index.md`:
 
 ```markdown
 # Archive Index
@@ -79,4 +79,4 @@ Keep it concise. List every file modified.
 
 ## 6. Update Timestamp
 
-Update `last_housekeeping` in `.cog-focus.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).
+Update `last_housekeeping` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).

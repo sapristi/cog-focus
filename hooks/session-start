@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Check if the current project has been initialized with cog-focus
-if [ ! -f ".cog-focus.yaml" ]; then
+if [ ! -f "cog-focus/config.yaml" ]; then
   exit 0
 fi
 
@@ -15,7 +15,7 @@ stale_nudges=""
 check_staleness() {
   local label="$1" command="$2" key="$3"
   local value
-  value=$(grep "^${key}:" .cog-focus.yaml 2>/dev/null | sed 's/^[^:]*: *//' | tr -d '[:space:]')
+  value=$(grep "^${key}:" cog-focus/config.yaml 2>/dev/null | sed 's/^[^:]*: *//' | tr -d '[:space:]')
   if [ -z "$value" ] || [ "$value" = "never" ]; then
     stale_nudges="${stale_nudges}
 - **${label}** has never been run. Suggest the user runs \`/${command}\`."
@@ -41,13 +41,13 @@ instructions='# Cog Focus — Active Project
 
 ## On Session Start
 Read these files in order:
-1. `goal.md` — north star
-2. `roadmap.md` — active milestone
-3. `.memory/hot-memory.md` — current state
-4. `.memory/patterns.md` — learned heuristics
+1. `cog-focus/goal.md` — north star
+2. `cog-focus/roadmap.md` — active milestone
+3. `cog-focus/memory/hot-memory.md` — current state
+4. `cog-focus/memory/patterns.md` — learned heuristics
 
 ## Memory File Map
-.memory/
+cog-focus/memory/
   hot-memory.md         # <50 lines, rewrite freely
   observations.md       # Append-only: - YYYY-MM-DD [tags]: observation
   action-items.md       # - [ ] task | due: | pri: | added:
@@ -66,7 +66,7 @@ Read these files in order:
 - Orient work toward the **active milestone**, not directly toward the goal.
 - Write observations immediately — do not wait.
 - Challenge when work does not serve the active milestone.
-- When a milestone completes, move it to Completed in roadmap.md with date + takeaway.
+- When a milestone completes, move it to Completed in cog-focus/roadmap.md with date + takeaway.
 - Be genuine in your judgement. Do you not try to please the user
 - In case you dont understand how a task helps going towards the goal, ask the user for clarification
 '
