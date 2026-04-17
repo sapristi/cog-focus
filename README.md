@@ -39,9 +39,9 @@ In any project directory, run `/cog-init`. It will scaffold the memory files, th
 
 Installing the plugin adds three skills and a session-start hook.
 
-`/cog-init` scaffolds a `cog-focus/` directory in your project containing `config.yaml`, `goal.md`, `roadmap.md`, and the `memory/` subdirectory, then walks you through defining your goal and first milestones.
+`/cog-init` scaffolds a `cog-focus/` directory in your project containing `config.yaml`, `roadmap.md` (with a locked Goal section at the top), and the `memory/` subdirectory, then walks you through defining your goal and first milestones.
 
-The session-start hook detects `cog-focus/config.yaml` and injects the memory system instructions for the session. Claude then reads the goal, roadmap, and memory files at the start of each session, maintaining continuity across conversations.
+The session-start hook detects `cog-focus/config.yaml` and injects the memory system instructions for the session. Claude then reads the roadmap and memory files at the start of each session, maintaining continuity across conversations.
 
 ### Session Lifecycle
 
@@ -56,13 +56,12 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
   ┌──────────────────┐
   │  Claude session  │
   └──────────────────┘
-     │            │          │
-     │ reads      │ reads +  │ writes
-     │            │ writes   │
-     ▼            ▼          ▼
-  goal.md   roadmap.md    observations.md
-            hot-memory.md
-            patterns.md
+        │                  │
+        │ reads + writes   │ writes
+        ▼                  ▼
+   roadmap.md         observations.md
+   hot-memory.md
+   patterns.md
 ```
 
 ### Project Structure
@@ -70,8 +69,7 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
 ```
 cog-focus/
   config.yaml         # Detection marker + timestamps
-  goal.md             # North star
-  roadmap.md          # Milestones, their subtasks, and an Untriaged inbox
+  roadmap.md          # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
     hot-memory.md     # What matters right now (<50 lines)
     observations.md   # Event log (append-only)

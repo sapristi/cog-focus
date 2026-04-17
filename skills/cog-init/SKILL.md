@@ -35,7 +35,7 @@ Tell the user the scaffolding is done, then help them define their goal through 
 3. **"How will you know you're done? Give me 3-5 concrete criteria."** — Get success criteria.
 4. **"Any constraints — time, scope, things you're explicitly NOT doing?"** — Get constraints.
 
-After collecting all answers, write `cog-focus/goal.md` with the user's responses filled into the template sections (What, Why, Success Looks Like, Constraints). Show the user the result and ask if it looks right. Revise if needed.
+After collecting all answers, fill in the **Goal** section at the top of `cog-focus/roadmap.md` with the user's responses (What, Why, Success Looks Like, Constraints). Keep the `<!-- LOCKED -->` marker intact. Show the user the result and ask if it looks right. Revise if needed.
 
 ## 5. Define the first milestones
 
@@ -44,7 +44,7 @@ Now help the user break the goal into milestones:
 1. **"What's the first concrete step toward this goal?"** — This becomes the active milestone. Ask follow-ups to fill in the objective, open questions, and approach.
 2. **"What comes after that? List 2-4 upcoming milestones — rough guesses are fine."** — These become the Upcoming section.
 
-Write `cog-focus/roadmap.md` with the active milestone filled in and the upcoming milestones listed. Show the user the result and ask if it looks right. Revise if needed.
+Fill in the **Active Milestone** and **Upcoming** sections of `cog-focus/roadmap.md`. Show the user the result and ask if it looks right. Revise if needed.
 
 ## 6. Report
 

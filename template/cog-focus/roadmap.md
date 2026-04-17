@@ -1,5 +1,24 @@
 # Roadmap
 
+## Goal
+<!-- LOCKED: edit only on deliberate pivot. Ask the user before changing this section. -->
+
+**What:** <!-- One sentence. What are you trying to accomplish? -->
+
+**Why:** <!-- Why does this matter? What changes when you succeed? -->
+
+**Success Looks Like:**
+<!-- 3-5 concrete, observable criteria. How will you know you're done? -->
+-
+-
+-
+
+**Constraints:**
+<!-- Time, resources, scope limits. What are you NOT doing? -->
+-
+
+---
+
 The path from here to the goal. Non-linear — milestones get revised, reordered, and added as you learn.
 
 Tasks live under the milestone they serve. If a task isn't yet scoped (or is cross-cutting), put it under **Untriaged** and let `/housekeeping` help sort it later.

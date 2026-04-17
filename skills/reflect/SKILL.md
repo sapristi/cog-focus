@@ -33,8 +33,7 @@ grep -c "^- " cog-focus/memory/observations.md 2>/dev/null
 ## Memory Files
 
 Read on activation:
-- `cog-focus/goal.md` (success criteria for progress check)
-- `cog-focus/roadmap.md` (active milestone, subtasks, untriaged, completed)
+- `cog-focus/roadmap.md` (Goal with success criteria; active milestone, subtasks, untriaged, completed)
 - `cog-focus/memory/reflect-cursor.md` (session path + cursor)
 - `cog-focus/memory/observations.md`
 - `cog-focus/memory/patterns.md`
@@ -78,7 +77,7 @@ Check if findings are already captured:
 - If stalled: suggest concrete next action or milestone revision
 - If the milestone seems done: flag it for completion and suggest promoting the next one
 
-**Goal-level check** (from `cog-focus/goal.md` "Success Looks Like"):
+**Goal-level check** (from `cog-focus/roadmap.md` Goal section, "Success Looks Like"):
 - For each criterion, check observations for evidence of progress
 - Rate: **on track** / **stalled** / **no signal**
 - Flag if work has drifted away from the goal — milestones should serve it

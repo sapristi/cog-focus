@@ -2,15 +2,13 @@
 
 ## On Session Start
 Read these files in order:
-1. `cog-focus/goal.md` — north star
-2. `cog-focus/roadmap.md` — active milestone, subtasks, untriaged
-3. `cog-focus/memory/hot-memory.md` — current state
-4. `cog-focus/memory/patterns.md` — learned heuristics
+1. `cog-focus/roadmap.md` — Goal (locked), active milestone, subtasks, untriaged
+2. `cog-focus/memory/hot-memory.md` — current state
+3. `cog-focus/memory/patterns.md` — learned heuristics
 
 ## File Map
 cog-focus/
-  goal.md               # North star; rewrite only on deliberate pivot
-  roadmap.md            # Milestones + their Subtasks + Untriaged inbox
+  roadmap.md            # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
     hot-memory.md       # <50 lines, rewrite freely
     observations.md     # Append-only: - YYYY-MM-DD [tags]: observation
@@ -30,7 +28,7 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 |------|---------|
 | hot-memory.md | Rewrite freely |
 | observations.md | Append only |
-| roadmap.md | Edit milestones, Subtasks, and Untriaged in place |
+| roadmap.md | Edit milestones, Subtasks, and Untriaged in place. **Goal section is locked** — don't edit without explicit user request. |
 | patterns.md | Edit in place |
 
 ## Behavior
