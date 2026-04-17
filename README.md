@@ -72,7 +72,7 @@ cog-focus/
   roadmap.md          # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
     hot-memory.md     # What matters right now (<50 lines)
-    observations.md   # Event log (append-only)
+    observations.md   # Event log (append-only, with ref counters)
     patterns.md       # Learned rules (<50 lines)
     archive/          # Old data, indexed
 ```
@@ -91,17 +91,21 @@ Condensation (`/reflect`):
 
 ```
   observations.md  ──(3+ on same theme)──▶  patterns.md
+  observations.md  ──(refs >= 3)─────────▶  patterns.md
   patterns.md      ──(heating up)────────▶  hot-memory.md
   hot-memory.md    ──(gone quiet)────────▶  dropped
 ```
 
+Two promotion paths into `patterns.md`: theme clustering (independent re-discovery) and explicit reference counts (same observation applied multiple times). Claude bumps an observation's `| refs: N` suffix when referencing it to inform a decision; high-ref observations graduate into patterns.
+
 Maintenance (`/housekeeping`):
 
 ```
-  observations.md (>50)  ──▶  archive/observations-YYYY.md
-  hot-memory.md (>50 ln) ──▶  blunt cap (if reflect didn't already trim)
-  Untriaged items        ──▶  triaged into milestone subtasks
-  stale subtasks         ──▶  surfaced to user
+  observations.md (>50)    ──▶  archive/observations-YYYY.md
+  observations (refs >= 3) ──▶  patterns.md (and clear suffix)
+  hot-memory.md (>50 ln)   ──▶  blunt cap (if reflect didn't already trim)
+  Untriaged items          ──▶  triaged into milestone subtasks
+  stale subtasks           ──▶  surfaced to user
 ```
 
 `/housekeeping` invokes `/reflect` first if it hasn't run in the last day, so the content decisions (what to remember) happen before the mechanical discipline (size caps, archival).

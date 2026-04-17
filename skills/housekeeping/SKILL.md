@@ -36,7 +36,17 @@ Reflect already demoted stale items by relevance. Check line count of `cog-focus
 
 Entries with lasting value → append to `observations.md`. Never silently delete — note removals in debrief.
 
-## 3. Triage & Surface Tasks
+## 3. Promote High-Ref Observations
+
+Scan `cog-focus/memory/observations.md` for entries with `| refs: N` where `N >= 3`.
+
+For each qualifying entry:
+1. If not already covered by an existing rule in `patterns.md`, distill it into a concise, actionable rule and add to `patterns.md` (respect the 50-line cap — compress existing rules if needed).
+2. Remove the `| refs: N` suffix from the source observation. It graduated — the counter restarts from zero in case the observation keeps being useful beyond the pattern.
+
+The observation text itself stays untouched. This step is additive to reflect's condensation (which also considers ref counts) — it catches high-ref accumulation when reflect isn't stale enough to trigger.
+
+## 4. Triage & Surface Tasks
 
 Read `cog-focus/roadmap.md`.
 
@@ -49,7 +59,7 @@ Move confirmed items into their milestone's `Subtasks` block (create the block i
 
 **Surface stale items** — open subtasks (anywhere in roadmap.md) older than 2 weeks: list with age and suggest a next action. Be direct.
 
-## 4. Rebuild Archive Index
+## 5. Rebuild Archive Index
 
 Scan `cog-focus/memory/archive/*.md` files. Write to `cog-focus/memory/archive/index.md`:
 
@@ -62,7 +72,7 @@ Scan `cog-focus/memory/archive/*.md` files. Write to `cog-focus/memory/archive/i
 |------|------------|---------|---------|
 ```
 
-## 5. Debrief
+## 6. Debrief
 
 Summarize:
 - What was archived/pruned
@@ -72,6 +82,6 @@ Summarize:
 
 Keep it concise. List every file modified.
 
-## 6. Update Timestamp
+## 7. Update Timestamp
 
 Update `last_housekeeping` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).

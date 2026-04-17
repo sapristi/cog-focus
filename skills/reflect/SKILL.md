@@ -90,11 +90,19 @@ Report progress honestly. If there's no evidence of movement, say so.
 
 ### 4. Condensation Check
 
-Scan `observations.md` for clusters of 3+ entries on the same theme/tag:
-- Distill into a pattern → add/update `cog-focus/memory/patterns.md`
+Two promotion signals into `patterns.md`:
+
+- **Clustering**: clusters of 3+ entries on the same theme/tag → distill into a pattern.
+- **Ref count**: individual entries with `| refs: N` where `N >= 3` → distill into a pattern even without a theme cluster. High refs mean the observation is actively load-bearing.
+
+For both paths:
+- Add/update `cog-focus/memory/patterns.md`
 - Don't delete observations — they stay as raw record
 - **Patterns cap: 50 lines.** If near cap, compress (merge overlapping rules, drop examples)
 - Entries must be timeless rules — "what to do" not "what happened"
+- Skip if the insight is already covered by an existing pattern
+
+Reflect does not clear `| refs: N` suffixes — housekeeping handles that mechanical step.
 
 ### 5. Hot-Memory Relevance
 

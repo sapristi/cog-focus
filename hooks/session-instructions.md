@@ -11,7 +11,7 @@ cog-focus/
   roadmap.md            # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
     hot-memory.md       # <50 lines, rewrite freely
-    observations.md     # Append-only: - YYYY-MM-DD [tags]: observation
+    observations.md     # Append-only + ref counter edits. Format: - YYYY-MM-DD [tags]: observation [ | refs: N ]
     patterns.md         # <50 lines, edit in place
     archive/            # Old data, managed by /housekeeping
 
@@ -27,7 +27,7 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 | File | Pattern |
 |------|---------|
 | hot-memory.md | Rewrite freely |
-| observations.md | Append only |
+| observations.md | Append only, except `\| refs: N` suffix edits (see Ref Counting below) |
 | roadmap.md | Edit milestones, Subtasks, and Untriaged in place. **Goal section is locked** — don't edit without explicit user request. |
 | patterns.md | Edit in place |
 
@@ -38,3 +38,12 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 - When a milestone completes, move it to Completed in cog-focus/roadmap.md with date + takeaway.
 - Be genuine in your judgement. Do not try to please the user.
 - In case you dont understand how a task helps going towards the goal, ask the user for clarification
+
+## Ref Counting (observations.md)
+Observations carry an optional `| refs: N` suffix indicating how often they've been explicitly applied. The text, date, and tags are immutable — only the counter changes.
+
+- When you **reference an existing observation to inform a decision**, bump its `| refs: N` counter. Add `| refs: 1` if no counter exists. Only bump once per session per observation.
+- When the **user explicitly flags an insight as useful** ("remember that", "that's important", etc.), bump its ref counter.
+- If you **independently re-discover the same insight**, append a new entry — don't bump. Re-observations feed the duplicate-clustering signal.
+
+High-ref observations are promotion candidates for `patterns.md` (handled by `/reflect` and `/housekeeping`).
