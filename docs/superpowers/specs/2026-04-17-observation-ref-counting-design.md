@@ -66,7 +66,7 @@ Both paths produce the same output: a distilled rule in patterns.md.
 
 | File | Change |
 |------|--------|
-| `hooks/session-start` | Add ref-counting behavior rules to injected instructions; update edit pattern table for observations.md |
+| `hooks/session-instructions.md` | Add ref-counting behavior rules to injected instructions; update edit pattern table for observations.md |
 | `skills/housekeeping/SKILL.md` | Add ref-driven promotion step |
 | `skills/reflect/SKILL.md` | Extend condensation step to consider ref counts |
 | `template/cog-focus/memory/observations.md` | No change (format is backwards-compatible) |
@@ -75,6 +75,6 @@ Both paths produce the same output: a distilled rule in patterns.md.
 
 - No new files created
 - patterns.md role, format, and 50-line cap unchanged
-- Session-start loading list unchanged (goal, roadmap, hot-memory, patterns)
+- Session-start loading list unchanged (roadmap, hot-memory, patterns)
 - Template structure unchanged
 - Archiving behavior unchanged — archived observations keep their ref counts
