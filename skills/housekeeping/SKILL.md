@@ -14,37 +14,27 @@ Then stop — do not proceed with the rest of this skill.
 
 Use this skill to perform memory housekeeping. Trigger if the user says "housekeeping", "clean up memory", "prune", "archive old data", or similar maintenance requests.
 
-## 0. Orientation (run FIRST)
+## 0. Reflect First (if stale)
 
-```bash
-# What changed since last run?
-find cog-focus/memory/ cog-focus/roadmap.md -type f -name "*.md" -mtime -1 | sort
+Read `last_reflect` from `cog-focus/config.yaml`. If it is `never` or older than 1 day (compared to today's date), invoke the `/reflect` skill **before** continuing. Otherwise skip to §1.
 
-# Observation count for archival threshold (>50)
-grep -c "^- " cog-focus/memory/observations.md 2>/dev/null
-```
+Division of labor: reflect owns content decisions (observation condensation, hot-memory relevance, progress assessment). Housekeeping enforces mechanical discipline on top — size caps, archival by count, task triage, archive index.
 
-Only read files that need work based on these results.
+## 1. Archive Observations
 
-## 1. Archive Stale Data
+Check observation count: `grep -c "^- " cog-focus/memory/observations.md`.
 
-**Observations**: If `cog-focus/memory/observations.md` has >50 entries, move oldest entries to `cog-focus/memory/archive/observations-YYYY.md` (grouped by year). Keep the 30 most recent in the main file.
+If >50: move oldest entries to `cog-focus/memory/archive/observations-YYYY.md` (grouped by year). Keep the 30 most recent in the main file. When appending to an existing archive file, add to the end. When creating a new one, add a title header.
 
-When appending to an existing archive file, add to the end. When creating a new one, add a title header.
+## 2. Enforce Hot-Memory Cap
 
-## 2. Prune Hot Memory
+Reflect already demoted stale items by relevance. Check line count of `cog-focus/memory/hot-memory.md`. If still >50 lines, apply blunt cap in this order:
 
-Keep `cog-focus/memory/hot-memory.md` under 50 lines. Pruning priority:
+1. **Resolved items** — ~~strikethrough~~, "DONE", "RESOLVED"
+2. **Past events** — dates already occurred
+3. **Low-signal entries** — FYI items with no action or deadline
 
-1. **Resolved items** — anything with ~~strikethrough~~, "DONE", "RESOLVED"
-2. **Past events** — entries about dates that have already occurred
-3. **Stale entries** — items not referenced in 14+ days
-4. **Low-signal entries** — FYI items with no action or deadline
-
-Where trimmed entries go:
-- Entries with lasting value → append to `observations.md`
-- Purely historical → let them go
-- Never silently delete — note removals in debrief
+Entries with lasting value → append to `observations.md`. Never silently delete — note removals in debrief.
 
 ## 3. Triage & Surface Tasks
 

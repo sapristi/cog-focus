@@ -100,10 +100,12 @@ Maintenance (`/housekeeping`):
 
 ```
   observations.md (>50)  ──▶  archive/observations-YYYY.md
-  hot-memory.md          ──▶  pruned to <50 lines
+  hot-memory.md (>50 ln) ──▶  blunt cap (if reflect didn't already trim)
   Untriaged items        ──▶  triaged into milestone subtasks
   stale subtasks         ──▶  surfaced to user
 ```
+
+`/housekeeping` invokes `/reflect` first if it hasn't run in the last day, so the content decisions (what to remember) happen before the mechanical discipline (size caps, archival).
 
 ### Threads
 
