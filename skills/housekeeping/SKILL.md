@@ -1,6 +1,6 @@
 ---
 name: housekeeping
-description: Memory maintenance — archives old data, prunes hot-memory, surfaces stale action items, rebuilds archive index
+description: Memory maintenance — archives old data, prunes hot-memory, triages untriaged tasks, surfaces stale items, rebuilds archive index
 user-invocable: true
 ---
 
@@ -18,11 +18,10 @@ Use this skill to perform memory housekeeping. Trigger if the user says "houseke
 
 ```bash
 # What changed since last run?
-find cog-focus/memory/ -type f -name "*.md" -mtime -1 | sort
+find cog-focus/memory/ cog-focus/roadmap.md -type f -name "*.md" -mtime -1 | sort
 
-# Entry counts for archival threshold (>50 observations, >10 done items)
+# Observation count for archival threshold (>50)
 grep -c "^- " cog-focus/memory/observations.md 2>/dev/null
-grep -c "^\- \[x\]" cog-focus/memory/action-items.md 2>/dev/null
 ```
 
 Only read files that need work based on these results.
@@ -30,8 +29,6 @@ Only read files that need work based on these results.
 ## 1. Archive Stale Data
 
 **Observations**: If `cog-focus/memory/observations.md` has >50 entries, move oldest entries to `cog-focus/memory/archive/observations-YYYY.md` (grouped by year). Keep the 30 most recent in the main file.
-
-**Action items**: If `cog-focus/memory/action-items.md` has >10 completed items, move them to `cog-focus/memory/archive/action-items-done.md`.
 
 When appending to an existing archive file, add to the end. When creating a new one, add a title header.
 
@@ -49,11 +46,18 @@ Where trimmed entries go:
 - Purely historical → let them go
 - Never silently delete — note removals in debrief
 
-## 3. Surface Stale Action Items
+## 3. Triage & Surface Tasks
 
-Review `cog-focus/memory/action-items.md`:
-- **Stale items** (open >2 weeks): list with age and suggest next action
-- Be direct. Recommend specific actions.
+Read `cog-focus/roadmap.md`.
+
+**Triage Untriaged items** — for each open item in the `Untriaged` section, ask the user one of:
+- Which milestone does it belong to? (move it into that milestone's Subtasks)
+- Is it legitimately cross-cutting? (leave it in Untriaged, note that it's ongoing)
+- Should it be dropped?
+
+Move confirmed items into their milestone's `Subtasks` block (create the block if absent). Leave cross-cutting items in place.
+
+**Surface stale items** — open subtasks (anywhere in roadmap.md) older than 2 weeks: list with age and suggest a next action. Be direct.
 
 ## 4. Rebuild Archive Index
 
@@ -72,7 +76,8 @@ Scan `cog-focus/memory/archive/*.md` files. Write to `cog-focus/memory/archive/i
 
 Summarize:
 - What was archived/pruned
-- Stale action items surfaced
+- Untriaged items sorted and where they went
+- Stale tasks surfaced
 - Any issues found
 
 Keep it concise. List every file modified.

@@ -24,22 +24,21 @@ Pattern recognition, memory maintenance, goal progress assessment.
 
 ```bash
 # What changed since last run?
-find cog-focus/memory/ -type f -name "*.md" -mtime -1 | sort
+find cog-focus/memory/ cog-focus/roadmap.md -type f -name "*.md" -mtime -1 | sort
 
-# Entry counts for archival threshold
-grep -c "^- " cog-focus/memory/observations.md cog-focus/memory/action-items.md 2>/dev/null
+# Observation count for archival threshold
+grep -c "^- " cog-focus/memory/observations.md 2>/dev/null
 ```
 
 ## Memory Files
 
 Read on activation:
 - `cog-focus/goal.md` (success criteria for progress check)
-- `cog-focus/roadmap.md` (active milestone and completed milestones)
+- `cog-focus/roadmap.md` (active milestone, subtasks, untriaged, completed)
 - `cog-focus/memory/reflect-cursor.md` (session path + cursor)
 - `cog-focus/memory/observations.md`
 - `cog-focus/memory/patterns.md`
 - `cog-focus/memory/hot-memory.md`
-- `cog-focus/memory/action-items.md`
 
 ## Process
 
@@ -65,7 +64,7 @@ Read `cog-focus/memory/reflect-cursor.md` for the session path and cursor.
 ### 2. Cross-Reference Memory
 
 Check if findings are already captured:
-- Commitments tracked in `action-items.md`?
+- Commitments tracked as subtasks under the right milestone in `roadmap.md` (or in `Untriaged` if unscoped)?
 - Learnings in `observations.md`?
 - Patterns distilled in `patterns.md`?
 
@@ -75,6 +74,7 @@ Check if findings are already captured:
 
 **Active milestone** (from `cog-focus/roadmap.md`):
 - Is the current approach working? Rate: **on track** / **stalled** / **blocked**
+- Scan its Subtasks: what's checked, what's stalled, what's been added recently? Concrete signal for progress.
 - If stalled: suggest concrete next action or milestone revision
 - If the milestone seems done: flag it for completion and suggest promoting the next one
 

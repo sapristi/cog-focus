@@ -60,8 +60,7 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
      │ reads      │ writes
      ▼            ▼
   goal.md      observations.md
-  roadmap.md   action-items.md
-  hot-memory
+  roadmap.md   hot-memory
   patterns
 ```
 
@@ -71,11 +70,10 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
 cog-focus/
   config.yaml         # Detection marker + timestamps
   goal.md             # North star
-  roadmap.md          # Milestones
+  roadmap.md          # Milestones, their subtasks, and an Untriaged inbox
   memory/
     hot-memory.md     # What matters right now (<50 lines)
     observations.md   # Event log (append-only)
-    action-items.md   # Tasks serving the goal
     patterns.md       # Learned rules (<50 lines)
     archive/          # Old data, indexed
 ```
@@ -102,9 +100,9 @@ Maintenance (`/housekeeping`):
 
 ```
   observations.md (>50)  ──▶  archive/observations-YYYY.md
-  action-items.md (done) ──▶  archive/action-items-done.md
   hot-memory.md          ──▶  pruned to <50 lines
-  stale action items     ──▶  surfaced to user
+  Untriaged items        ──▶  triaged into milestone subtasks
+  stale subtasks         ──▶  surfaced to user
 ```
 
 ### Threads
