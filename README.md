@@ -43,6 +43,28 @@ Installing the plugin adds three skills and a session-start hook.
 
 The session-start hook detects `cog-focus/config.yaml` and injects the memory system instructions for the session. Claude then reads the goal, roadmap, and memory files at the start of each session, maintaining continuity across conversations.
 
+### Session Lifecycle
+
+```
+  SessionStart hook
+        │
+        │ detects cog-focus/config.yaml
+        ▼
+  injects instructions + staleness nudges
+        │
+        ▼
+  ┌──────────────────┐
+  │  Claude session  │
+  └──────────────────┘
+     │            │
+     │ reads      │ writes
+     ▼            ▼
+  goal.md      observations.md
+  roadmap.md   action-items.md
+  hot-memory
+  patterns
+```
+
 ### Project Structure
 
 ```
@@ -65,6 +87,25 @@ cog-focus/
 | `/cog-init` | Scaffold files, then interactively define your goal and first milestones |
 | `/reflect` | Review sessions, check goal progress, condense patterns |
 | `/housekeeping` | Archive old data, prune hot-memory, surface stale items |
+
+### Memory Flows
+
+Condensation (`/reflect`):
+
+```
+  observations.md  ──(3+ on same theme)──▶  patterns.md
+  patterns.md      ──(heating up)────────▶  hot-memory.md
+  hot-memory.md    ──(gone quiet)────────▶  dropped
+```
+
+Maintenance (`/housekeeping`):
+
+```
+  observations.md (>50)  ──▶  archive/observations-YYYY.md
+  action-items.md (done) ──▶  archive/action-items-done.md
+  hot-memory.md          ──▶  pruned to <50 lines
+  stale action items     ──▶  surfaced to user
+```
 
 ### Threads
 
