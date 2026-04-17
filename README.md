@@ -56,12 +56,13 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
   ┌──────────────────┐
   │  Claude session  │
   └──────────────────┘
-     │            │
-     │ reads      │ writes
-     ▼            ▼
-  goal.md      observations.md
-  roadmap.md   hot-memory
-  patterns
+     │            │          │
+     │ reads      │ reads +  │ writes
+     │            │ writes   │
+     ▼            ▼          ▼
+  goal.md   roadmap.md    observations.md
+            hot-memory.md
+            patterns.md
 ```
 
 ### Project Structure
