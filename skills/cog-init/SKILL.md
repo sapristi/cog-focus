@@ -28,14 +28,16 @@ cp -r "${CLAUDE_PLUGIN_ROOT}/template/cog-focus" .
 
 ## 4. Define the goal
 
-Tell the user the scaffolding is done, then help them define their goal through a short conversation. Ask these questions one at a time, waiting for the user's answer before continuing:
+Tell the user the scaffolding is done, then help them define their goal through a short conversation. Ask these questions one at a time, waiting for the user's answer before continuing. Tell the user upfront they can **skip** any question that isn't pertinent (e.g. say "skip" or "n/a") — not every project needs all of them.
 
 1. **"What are you trying to accomplish?"** — Get a one-sentence goal.
 2. **"Why does this matter? What changes when you succeed?"** — Get the motivation.
-3. **"How will you know you're done? Give me 3-5 concrete criteria."** — Get success criteria.
-4. **"Any constraints — time, scope, things you're explicitly NOT doing?"** — Get constraints.
+3. **"How will you know this is working? Either concrete done criteria (if scoped), or signals of ongoing usefulness (if open-ended) — a few examples either way."** — Get success criteria, adapted to project shape.
+4. **"If someone asked in 3 months whether this was worth it, what would you point to?"** — Get a concrete usefulness signal (especially useful for open-ended projects, but works for both).
+5. **(Only if not already clear from Q1–Q4)** **"What shape is this — a tool you use, a library others use, research, exploration, something else?"** — Clarifies the success mode (self-use vs. shipped vs. exploratory) so future sessions know the audience. Skip if earlier answers already make this obvious.
+6. **"Any constraints — time, scope, things you're explicitly NOT doing?"** — Get constraints.
 
-After collecting all answers, fill in the **Goal** section at the top of `cog-focus/roadmap.md` with the user's responses (What, Why, Success Looks Like, Constraints). Keep the `<!-- LOCKED -->` marker intact. Show the user the result and ask if it looks right. Revise if needed.
+After collecting answers, fill in the **Goal** section at the top of `cog-focus/roadmap.md` with the user's responses (What, Why, Success Looks Like, Constraints). Fold the answers to Q3, Q4, and Q5 together under **Success Looks Like**. Skipped questions → leave that subsection empty or write "None" / "Open-ended — see notes above". Keep the `<!-- LOCKED -->` marker intact. Show the user the result and ask if it looks right. Revise if needed.
 
 ## 5. Define the first milestones
 
