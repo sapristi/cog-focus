@@ -47,3 +47,11 @@ Observations carry an optional `| refs: N` suffix indicating how often they've b
 - If you **independently re-discover the same insight**, append a new entry — don't bump. Re-observations feed the duplicate-clustering signal.
 
 High-ref observations are promotion candidates for `patterns.md` (handled by `/reflect` and `/housekeeping`).
+
+## Hot-Memory Feedback (observations.md)
+Claims in `hot-memory.md` are only useful if they shape work. Tag observations to signal the connection:
+
+- `[hot-ref]` — this observation confirms, restates, or applies a claim in `hot-memory.md`.
+- `[hot-stale]` — this observation contradicts or supersedes a claim in `hot-memory.md`.
+
+Tags stack with existing ones (e.g. `[decision, hot-stale]`). Apply only when the link is real — don't retrofit to inflate the signal.
