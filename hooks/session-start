@@ -36,8 +36,19 @@ check_staleness() {
 check_staleness "Reflect" "reflect" "last_reflect"
 check_staleness "Housekeeping" "housekeeping" "last_housekeeping"
 
+# Read autocommit flag (true|false; absent = false)
+autocommit_value=$(grep "^autocommit:" cog-focus/config.yaml 2>/dev/null | sed 's/^[^:]*: *//' | tr -d '[:space:]')
+
 # Project has cog-focus enabled — inject instructions
 instructions=$(cat "${PLUGIN_ROOT}/hooks/session-instructions.md")
+
+# Append autocommit instructions if enabled
+if [ "$autocommit_value" = "true" ]; then
+  autocommit_block=$(cat "${PLUGIN_ROOT}/hooks/autocommit-instructions.md")
+  instructions="${instructions}
+
+${autocommit_block}"
+fi
  
 escape_for_json() {
     local s="$1"

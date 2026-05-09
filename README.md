@@ -129,6 +129,17 @@ When a topic comes up 3+ times across observations, raise it into a **thread** â
 
 Cog Focus activates per-project by detecting `cog-focus/config.yaml` in the project root, created by `/cog-init`.
 
+### Autocommit
+
+`cog-focus/config.yaml` supports an `autocommit` flag (default `false`). When set to `true`, Claude commits completed work automatically â€” either when a subtask is checked off in `roadmap.md` or when a coherent unit of work is done. Commits run via a sub-agent that:
+
+- Stages only files Claude touched during the task
+- Pauses (and asks) if the working tree contains unrelated WIP
+- Follows the repo's existing commit-message style
+- Never pushes, never amends
+
+Toggle by editing `cog-focus/config.yaml`. `/cog-init` also offers it as an optional setting at project setup.
+
 ## License
 
 MIT

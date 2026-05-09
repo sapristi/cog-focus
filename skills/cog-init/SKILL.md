@@ -48,9 +48,18 @@ Now help the user break the goal into milestones:
 
 Fill in the **Active Milestone** and **Upcoming** sections of `cog-focus/roadmap.md`. Show the user the result and ask if it looks right. Revise if needed.
 
-## 6. Report
+## 6. Optional settings
+
+Ask the user one optional setting:
+
+- **"Enable autocommit for this project? When on, Claude commits completed work automatically — either when a subtask checkbox is flipped or when a coherent task is done. Commits are made by a sub-agent that stages only files Claude touched and pauses if it detects unrelated WIP. Default: no."**
+
+If the user says yes, edit `cog-focus/config.yaml` and change `autocommit: false` to `autocommit: true`. Otherwise leave it as-is.
+
+## 7. Report
 
 Tell the user Cog Focus is initialized and ready. Mention that:
 - The session-start hook will now activate for this project
 - They can run `/reflect` to review progress and `/housekeeping` to maintain memory files
 - Goal and roadmap can always be edited directly as they learn more
+- Autocommit can be toggled later by editing `cog-focus/config.yaml`
