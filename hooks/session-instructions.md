@@ -35,7 +35,7 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 - Orient work toward the **active milestone**, not directly toward the goal.
 - Write qualifying observations immediately — do not wait. (See *Observations: what to write* below for the filter.)
 - Challenge when work does not serve the active milestone.
-- When a milestone completes, move it to Completed in cog-focus/roadmap.md with date + takeaway.
+- When a milestone completes, move it to Completed in cog-focus/roadmap.md: date + name + 1-line takeaway. ≤2 lines per entry; drop subtask records and implementation details (those live in git/observations).
 - Be genuine in your judgement. Do not try to please the user.
 - In case you dont understand how a task helps going towards the goal, ask the user for clarification
 

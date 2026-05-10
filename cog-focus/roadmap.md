@@ -35,4 +35,6 @@ None — exploring and iterating as needs arise.
 ## Untriaged
 
 ## Completed
-<!-- Append-only. Format: - YYYY-MM-DD: milestone name — key takeaway or outcome -->
+<!-- Append-only. ≤2 lines per entry. Record what you learned, not what you did. -->
+<!-- Format: - YYYY-MM-DD: milestone name — 1-line takeaway -->
+<!-- Drop subtask records and implementation details (files, commits, test counts) — those belong in git/observations. -->

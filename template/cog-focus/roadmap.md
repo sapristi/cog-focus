@@ -46,6 +46,6 @@ Subtask format (shared everywhere):
 <!-- Move items into a milestone's Subtasks when the scope becomes clear. -->
 
 ## Completed
-<!-- Append-only. Record what you learned, not just what you did. -->
-<!-- Format: - YYYY-MM-DD: milestone name — key takeaway or outcome -->
-<!-- Completed milestones keep their Subtasks block inline as a record of what was done. -->
+<!-- Append-only. ≤2 lines per entry. Record what you learned, not what you did. -->
+<!-- Format: - YYYY-MM-DD: milestone name — 1-line takeaway -->
+<!-- Drop subtask records and implementation details (files, commits, test counts) — those belong in git/observations. -->
