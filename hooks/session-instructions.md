@@ -33,11 +33,27 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 
 ## Behavior
 - Orient work toward the **active milestone**, not directly toward the goal.
-- Write observations immediately — do not wait.
+- Write qualifying observations immediately — do not wait. (See *Observations: what to write* below for the filter.)
 - Challenge when work does not serve the active milestone.
 - When a milestone completes, move it to Completed in cog-focus/roadmap.md with date + takeaway.
 - Be genuine in your judgement. Do not try to please the user.
 - In case you dont understand how a task helps going towards the goal, ask the user for clarification
+
+## Observations: what to write
+Observation = something that should change a future decision. Fewer, sharper entries beat a journal.
+
+Write when:
+- A decision was made and the rationale isn't obvious from the diff (`[decision]`)
+- Something surprised you in a way that generalizes beyond the current task (`[insight]`)
+- A specific attempt failed in a way worth remembering (`[failed]`); a distilled negative rule (`[anti-pattern]`)
+- A claim in `hot-memory.md` was confirmed or contradicted (`[hot-ref]` / `[hot-stale]`)
+
+Skip when:
+- It's a status update ("X installed", "Y shipped", "milestone done") — belongs in commits or `hot-memory.md`
+- It restates something already in `patterns.md` or `hot-memory.md` — bump `| refs: N` instead (see Ref Counting)
+- It's project-state that won't matter once the next milestone lands
+
+**Length: ≤2 lines.** If you need more, write a design doc under `docs/` and let the observation point at it. Multi-paragraph entries indicate it's a spec, not an observation.
 
 ## Ref Counting (observations.md)
 Observations carry an optional `| refs: N` suffix indicating how often they've been explicitly applied. The text, date, and tags are immutable — only the counter changes.
