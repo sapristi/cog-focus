@@ -53,7 +53,7 @@ Skip when:
 - It restates something already in `patterns.md` or `hot-memory.md` — bump `| refs: N` instead (see Ref Counting)
 - It's project-state that won't matter once the next milestone lands
 
-**Length: ≤2 lines.** If you need more, write a design doc under `docs/` and let the observation point at it. Multi-paragraph entries indicate it's a spec, not an observation.
+**Length: ≤4 lines.** If you need more, write a design doc under `docs/` and let the observation point at it. Multi-paragraph entries indicate it's a spec, not an observation.
 
 ## Ref Counting (observations.md)
 Observations carry an optional `| refs: N` suffix indicating how often they've been explicitly applied. The text, date, and tags are immutable — only the counter changes.
