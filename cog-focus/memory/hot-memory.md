@@ -10,5 +10,5 @@
 No active milestone — exploratory. Work is architectural plumbing on the plugin itself (dogfooding).
 
 ## Watch
-- Roadmap stays empty while commits keep landing. If this persists another 2–3 weeks, either name a milestone or explicitly accept "exploratory-forever" in the Goal section of roadmap.md.
 - Over-engineering tendency on first prototypes (see patterns.md). Lean smaller earlier.
+- Sub-agent dispatch is becoming a recurring design lever (autocommit, housekeeping archive). Two instances logged; reach for it for any mechanical-but-noisy step, but watch for over-use — promote to patterns.md if a third lands.
