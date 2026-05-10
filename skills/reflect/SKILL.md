@@ -90,14 +90,15 @@ Report progress honestly. If there's no evidence of movement, say so.
 
 ### 4. Condensation Check
 
-Two promotion signals into `patterns.md`:
+Three promotion signals into `patterns.md`:
 
-- **Clustering**: clusters of 3+ entries on the same theme/tag → distill into a pattern.
-- **Ref count**: individual entries with `| refs: N` where `N >= 3` → distill into a pattern even without a theme cluster. High refs mean the observation is actively load-bearing.
+- **Clustering**: clusters of 3+ entries on the same theme/tag in `observations.md` → distill into a pattern.
+- **Ref count**: individual observations with `| refs: N` where `N >= 3` → distill into a pattern even without a theme cluster. High refs mean the observation is actively load-bearing.
+- **Hot-memory stabilization**: scan `hot-memory.md` for lines that have generalized into timeless rules — claims that survive across milestones rather than describe project-state (the "carried priors" shape). Promote each into `patterns.md` and replace the hot-memory line with a one-line pointer (`see patterns.md: <rule>`) or remove it if the pattern covers it fully. This enforces hot-memory rule #4 ("promote when stable").
 
-For both paths:
+For all paths:
 - Add/update `cog-focus/memory/patterns.md`
-- Don't delete observations — they stay as raw record
+- Don't delete observations — they stay as raw record. Hot-memory lines, by contrast, get pointered or removed once promoted (hot-memory is volatile by design).
 - **Patterns cap: 50 lines.** If near cap, compress (merge overlapping rules, drop examples)
 - Entries must be timeless rules — "what to do" not "what happened"
 - Skip if the insight is already covered by an existing pattern
