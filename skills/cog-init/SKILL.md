@@ -8,7 +8,11 @@ Initialize a Cog Focus project in the current working directory. Follow these st
 
 ## 1. Guard
 
-Check if `cog-focus/` directory already exists in the current directory. If it does, warn the user that cog-focus is already initialized and ask whether to reinitialize (overwrite) or abort. Do not proceed until the user responds.
+If `cog-focus/` does not exist, proceed.
+
+If `cog-focus/` exists, check whether `cog-focus/roadmap.md` is **pristine** — i.e. its Goal section still contains the literal placeholder `**What:** <!--`. One-liner: `grep -qF '**What:** <!--' cog-focus/roadmap.md` (exit 0 → pristine). Pristine means the directory was either freshly scaffolded by `scripts/install-opencode.sh` or left over from an aborted earlier run; in that case proceed silently.
+
+Otherwise (`cog-focus/` exists with a filled-in Goal), warn the user that cog-focus is already initialized and ask whether to reinitialize (overwrite) or abort. Do not proceed until the user responds.
 
 ## 2. Git check
 
