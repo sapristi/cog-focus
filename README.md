@@ -31,6 +31,16 @@ claude plugin list
 
 You should see `cog-focus` in the output. Restart Claude Code to activate the plugin.
 
+### For opencode
+
+If you use [opencode](https://opencode.ai) instead of (or alongside) Claude Code, run this from your project root:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/sapristi/cog-focus/main/scripts/install-opencode.sh | bash
+```
+
+It downloads the three skills into `.opencode/skills/`, drops `cog-focus/instructions.md`, and patches `opencode.json` to load those instructions. Pin to a tag or branch via `COG_FOCUS_REF=v0.2.0` (defaults to `main`). Re-running is safe — the patch step is idempotent.
+
 ## Quick Start
 
 In any project directory, run `/cog-init`. It will scaffold the memory files, then walk you through defining your goal and first milestones interactively. Once done, start working.
