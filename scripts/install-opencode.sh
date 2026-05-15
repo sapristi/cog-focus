@@ -4,7 +4,8 @@
 #
 # Run this from the root of your own project (not from the cog-focus repo).
 # It downloads three skills into .opencode/skills/, drops a cog-focus/
-# instructions file, and patches opencode.json so opencode loads them.
+# instructions file, scaffolds the cog-focus/ template (without overwriting
+# user customizations), and patches opencode.json so opencode loads them.
 #
 # Usage:
 #   bash scripts/install-opencode.sh
@@ -16,11 +17,27 @@ set -euo pipefail
 
 REF="${COG_FOCUS_REF:-main}"
 BASE_URL="https://raw.githubusercontent.com/sapristi/cog-focus/${REF}"
+TEMPLATE_BASE_URL="${BASE_URL}/template/cog-focus"
 
 SKILLS=(cog-init reflect housekeeping)
 INSTRUCTIONS_REL="cog-focus/instructions.md"
 OPENCODE_JSON="opencode.json"
 OPENCODE_JSONC="opencode.jsonc"
+
+# Template files (paths relative to cog-focus/) — never overwrite if already
+# present, since the user customizes these (goal, hot-memory, observations).
+TEMPLATE_FILES=(
+  "config.yaml"
+  "roadmap.md"
+  "memory/hot-memory.md"
+  "memory/observations.md"
+  "memory/patterns.md"
+  "memory/reflect-cursor.md"
+  "memory/archive/index.md"
+)
+
+# Parallel array tracking the action taken for each TEMPLATE_FILES entry.
+TEMPLATE_ACTIONS=()
 
 err() {
   printf 'error: %s\n' "$*" >&2
@@ -34,7 +51,7 @@ require() {
 require curl
 
 # --- step 1: download skills ----------------------------------------------
-printf '[1/4] downloading skills...\n'
+printf '[1/5] downloading skills...\n'
 for skill in "${SKILLS[@]}"; do
   dest_dir=".opencode/skills/${skill}"
   dest_file="${dest_dir}/SKILL.md"
@@ -45,14 +62,30 @@ for skill in "${SKILLS[@]}"; do
 done
 
 # --- step 2: download instructions ----------------------------------------
-printf '[2/4] downloading instructions...\n'
+printf '[2/5] downloading instructions...\n'
 mkdir -p "$(dirname "${INSTRUCTIONS_REL}")"
 curl --fail --silent --show-error --location \
   "${BASE_URL}/hooks/session-instructions.md" -o "${INSTRUCTIONS_REL}"
 printf '       wrote %s\n' "${INSTRUCTIONS_REL}"
 
-# --- step 3: patch opencode.json ------------------------------------------
-printf '[3/4] patching %s...\n' "${OPENCODE_JSON}"
+# --- step 3: scaffold template files (never overwrite) --------------------
+printf '[3/5] scaffolding cog-focus/ template...\n'
+for rel in "${TEMPLATE_FILES[@]}"; do
+  dest="cog-focus/${rel}"
+  if [ -e "${dest}" ]; then
+    printf '       skipped (exists) %s\n' "${dest}"
+    TEMPLATE_ACTIONS+=("skipped (exists)")
+    continue
+  fi
+  mkdir -p "$(dirname "${dest}")"
+  curl --fail --silent --show-error --location \
+    "${TEMPLATE_BASE_URL}/${rel}" -o "${dest}"
+  printf '       created %s\n' "${dest}"
+  TEMPLATE_ACTIONS+=("created")
+done
+
+# --- step 4: patch opencode.json ------------------------------------------
+printf '[4/5] patching %s...\n' "${OPENCODE_JSON}"
 
 if [ ! -f "${OPENCODE_JSON}" ] && [ -f "${OPENCODE_JSONC}" ]; then
   err "found ${OPENCODE_JSONC} but not ${OPENCODE_JSON}. jsonc (with comments) is not supported by this installer. Please convert it to ${OPENCODE_JSON} or add \"${INSTRUCTIONS_REL}\" to its \"instructions\" array manually."
@@ -82,15 +115,18 @@ else
   fi
 fi
 
-# --- step 4: summary -------------------------------------------------------
-printf '[4/4] done.\n\n'
+# --- step 5: summary -------------------------------------------------------
+printf '[5/5] done.\n\n'
 printf 'Files written/touched:\n'
 for skill in "${SKILLS[@]}"; do
   printf '  - .opencode/skills/%s/SKILL.md\n' "${skill}"
 done
 printf '  - %s\n' "${INSTRUCTIONS_REL}"
+for i in "${!TEMPLATE_FILES[@]}"; do
+  printf '  - cog-focus/%s (%s)\n' "${TEMPLATE_FILES[$i]}" "${TEMPLATE_ACTIONS[$i]}"
+done
 printf '  - %s (%s)\n' "${OPENCODE_JSON}" "${patch_action}"
 printf '\nNext steps:\n'
 printf '  Open this project in opencode; the cog-focus instructions are now active.\n'
-printf '  Note: roadmap.md and memory files are not yet scaffolded -- see the\n'
-printf '  plugin README for next steps.\n'
+printf '  Run /cog-init to walk through the interactive goal-definition flow\n'
+printf '  (defines goal, milestones, and optional settings — steps 4-7 of the skill).\n'

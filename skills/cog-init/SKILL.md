@@ -16,7 +16,7 @@ Run `git rev-parse --is-inside-work-tree` in the current directory. If the comma
 
 ## 3. Copy template files
 
-Before copying, check if `cog-focus/` already exists in the current directory. If it does, list its contents and ask the user whether to overwrite or skip. Do not overwrite without explicit confirmation.
+If `CLAUDE_PLUGIN_ROOT` is set (Claude Code): before copying, check if `cog-focus/` already exists in the current directory. If it does, list its contents and ask the user whether to overwrite or skip. Do not overwrite without explicit confirmation.
 
 Then copy the template directory:
 
@@ -24,7 +24,7 @@ Then copy the template directory:
 cp -r "${CLAUDE_PLUGIN_ROOT}/template/cog-focus" .
 ```
 
-`CLAUDE_PLUGIN_ROOT` is an environment variable set by Claude Code pointing to the plugin's install directory.
+If `CLAUDE_PLUGIN_ROOT` is unset (opencode): skip this step — `scripts/install-opencode.sh` already scaffolded the template files into `cog-focus/`. If `cog-focus/roadmap.md` does not exist, instruct the user to run `scripts/install-opencode.sh` first and then re-invoke `/cog-init`.
 
 ## 4. Define the goal
 
