@@ -61,6 +61,37 @@ for skill in "${SKILLS[@]}"; do
   printf '       wrote %s\n' "${dest_file}"
 done
 
+# Patch the reflect SKILL.md: replace the session-source block (Claude Code
+# default) with the OpenCode-specific snippet. Keep markers in place so this
+# remains idempotent on re-run.
+SKILL_FILE=".opencode/skills/reflect/SKILL.md"
+SNIPPET_URL="${BASE_URL}/skills/reflect/opencode-session-source.md"
+SNIPPET_FILE="$(mktemp)"
+curl --fail --silent --show-error --location "${SNIPPET_URL}" -o "${SNIPPET_FILE}"
+
+TMP="$(mktemp "${SKILL_FILE}.XXXXXX")"
+awk -v snippet_file="${SNIPPET_FILE}" '
+  /<!-- OPENCODE-PATCH:session-source:start -->/ {
+    print
+    while ((getline line < snippet_file) > 0) print line
+    in_block=1
+    next
+  }
+  /<!-- OPENCODE-PATCH:session-source:end -->/ {
+    in_block=0
+    print
+    next
+  }
+  !in_block { print }
+' "${SKILL_FILE}" > "${TMP}"
+mv "${TMP}" "${SKILL_FILE}"
+rm -f "${SNIPPET_FILE}"
+
+if ! grep -q '<!-- OPENCODE-PATCH:session-source:start -->' "${SKILL_FILE}"; then
+  err "reflect SKILL.md is missing the OPENCODE-PATCH marker — install script needs updating to match upstream"
+fi
+printf '       patched %s (opencode session source)\n' "${SKILL_FILE}"
+
 # --- step 2: download instructions ----------------------------------------
 printf '[2/5] downloading instructions...\n'
 mkdir -p "$(dirname "${INSTRUCTIONS_REL}")"

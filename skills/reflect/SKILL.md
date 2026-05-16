@@ -45,6 +45,7 @@ Read on activation:
 
 Read `cog-focus/memory/reflect-cursor.md` for the session path and cursor.
 
+<!-- OPENCODE-PATCH:session-source:start -->
 1. Get `session_path` from reflect-cursor.md
 2. Glob for `*.jsonl` in that directory
 3. Only read sessions modified **after** `last_processed` (if `never`, read most recent 3)
@@ -52,6 +53,7 @@ Read `cog-focus/memory/reflect-cursor.md` for the session path and cursor.
 5. Assistant messages: `type: "assistant"` with `message.content` items having `type: "text"`
 
 **After processing**, update `last_processed` in reflect-cursor.md.
+<!-- OPENCODE-PATCH:session-source:end -->
 
 **Look for:**
 - Unresolved threads — questions asked but never answered
