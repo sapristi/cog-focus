@@ -162,6 +162,26 @@ If step 3 did not flag the milestone as done, skip this step entirely — no pro
 
 Update `last_reflect` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).
 
+### 11. Propose Commit
+
+If this reflect pass modified any files (see the Debrief list), ask the user whether to commit them. Phrase it as a single yes/no, and list the files so they know what's in scope.
+
+If the user accepts, dispatch a `general-purpose` sub-agent with this prompt:
+
+> Commit only these files — do not stage or modify anything else: `<file list>`. Rationale: `/reflect` pass on `<today's date>`.
+>
+> Stage exactly the listed files by explicit path (`git add <file>` per file, no `-A`/`-u`). If any of those files are not actually modified per `git status`, skip them. Leave every other modified or staged file in the working tree untouched — even if it looks related.
+>
+> Check `git log -n 5 --oneline` to mirror this repo's commit-message style. Draft a concise message in that style (subject something like `chore(reflect): <one-line summary>`) and run `git commit`.
+>
+> Never push. Never `--amend`. Never `--no-verify`.
+>
+> Return exactly one line: `committed <sha>: <msg>` | `nothing to commit` | `failed: <error>`.
+
+Surface the sub-agent's result line to the user. If the user declines, say so and stop — do not stage or commit anything.
+
+Skip this step if reflect made no file changes.
+
 ## Threads
 
 When a topic keeps coming up across observations, raise it into a **thread** — a synthesis file that pulls scattered fragments into a coherent narrative.
