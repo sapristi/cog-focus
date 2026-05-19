@@ -77,7 +77,7 @@ Check if findings are already captured:
 - Is the current approach working? Rate: **on track** / **stalled** / **blocked**
 - Scan its Subtasks: what's checked, what's stalled, what's been added recently? Concrete signal for progress.
 - If stalled: suggest concrete next action or milestone revision
-- If the milestone seems done: flag it for completion and suggest promoting the next one
+- If the milestone seems done: flag it for completion and remember this — step 9 will prompt the user to pick what's next. Don't act on the transition yet.
 
 **Goal-level check** (from `cog-focus/roadmap.md` Goal section, "Success Looks Like"):
 - For each criterion, check observations for evidence of progress
@@ -141,7 +141,24 @@ Compose a concise summary:
 
 **IMPORTANT**: List every file you modified and summarize the changes. If you made no changes in a step, state that explicitly.
 
-### 9. Update Timestamp
+### 9. Milestone Transition
+
+If — and only if — step 3 flagged the active milestone as done, ask the user to choose what's next. Present three options:
+
+1. **Pick the next milestone from `Upcoming`** — list the upcoming milestones (with their one-line descriptions) so the user can pick one. The chosen milestone moves into `Active Milestone`.
+2. **Choose another / add a new milestone** — the user names a different milestone (existing or new); draft its `Objective`, `Open questions`, `Approach`, and initial `Subtasks` from what reflect surfaced, then confirm before writing.
+3. **Do nothing** — leave `Active Milestone` empty (or unchanged) for now.
+
+On options 1 or 2, edit `cog-focus/roadmap.md`:
+- Append the completed milestone to `Completed` using `- YYYY-MM-DD: milestone name — 1-line takeaway` (takeaway = what you learned, not what you did).
+- Replace `Active Milestone` with the new one in the full milestone format (Objective / Open questions / Approach / Subtasks).
+- Remove the new milestone from `Upcoming` if it came from there.
+
+On option 3, still append the completed milestone to `Completed` and clear `Active Milestone` to `None — exploring and iterating as needs arise.` (or leave the previous one if the user wants to keep working it).
+
+If step 3 did not flag the milestone as done, skip this step entirely — no prompt, no edits.
+
+### 10. Update Timestamp
 
 Update `last_reflect` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).
 
