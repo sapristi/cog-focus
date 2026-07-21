@@ -7,6 +7,8 @@ Read these files in order:
 3. `cog-focus/memory/patterns.md` — learned heuristics
 
 ## File Map
+
+```
 cog-focus/
   roadmap.md            # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
@@ -14,6 +16,7 @@ cog-focus/
     observations.md     # Append-only + ref counter edits. Format: - YYYY-MM-DD [tags]: observation [ | refs: N ]
     patterns.md         # <50 lines, edit in place
     archive/            # Old data, managed by /housekeeping
+```
 
 ## Tasks
 One surface: `roadmap.md`.
