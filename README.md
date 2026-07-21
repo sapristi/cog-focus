@@ -70,7 +70,6 @@ The session-start hook detects `cog-focus/config.yaml` and injects the memory sy
         │ reads + writes   │ writes
         ▼                  ▼
    roadmap.md         observations.md
-   hot-memory.md
    patterns.md
 ```
 
@@ -81,7 +80,6 @@ cog-focus/
   config.yaml         # Detection marker + timestamps
   roadmap.md          # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
-    hot-memory.md     # What matters right now (<50 lines)
     observations.md   # Event log (append-only, with ref counters)
     patterns.md       # Learned rules (<50 lines)
     archive/          # Old data, indexed
@@ -93,7 +91,7 @@ cog-focus/
 |-------|-------------|
 | `/cog-init` | Scaffold files, then interactively define your goal and first milestones |
 | `/reflect` | Review sessions, check goal progress, condense patterns |
-| `/housekeeping` | Archive old data, prune hot-memory, surface stale items |
+| `/housekeeping` | Archive old data, surface stale items |
 
 ### Memory Flows
 
@@ -102,8 +100,6 @@ Condensation (`/reflect`):
 ```
   observations.md  ──(3+ on same theme)──▶  patterns.md
   observations.md  ──(refs >= 3)─────────▶  patterns.md
-  patterns.md      ──(heating up)────────▶  hot-memory.md
-  hot-memory.md    ──(gone quiet)────────▶  dropped
 ```
 
 Two promotion paths into `patterns.md`: theme clustering (independent re-discovery) and explicit reference counts (same observation applied multiple times). Claude bumps an observation's `| refs: N` suffix when referencing it to inform a decision; high-ref observations graduate into patterns.
@@ -113,7 +109,6 @@ Maintenance (`/housekeeping`):
 ```
   observations.md (>50)    ──▶  archive/observations-YYYY.md
   observations (refs >= 3) ──▶  patterns.md (and clear suffix)
-  hot-memory.md (>50 ln)   ──▶  blunt cap (if reflect didn't already trim)
   Untriaged items          ──▶  triaged into milestone subtasks
   stale subtasks           ──▶  surfaced to user
 ```
@@ -133,7 +128,7 @@ When a topic comes up 3+ times across observations, raise it into a **thread** �
 - **One goal, many milestones** — the goal is stable; the path to it evolves.
 - **Plain text** — markdown files, grep-friendly, git-trackable.
 - **Self-contained** — everything lives in `cog-focus/`, one directory to track or ignore.
-- **Progressive condensation** — observations → patterns → hot-memory.
+- **Progressive condensation** — observations → patterns.
 
 ## Opt-In Per Project
 

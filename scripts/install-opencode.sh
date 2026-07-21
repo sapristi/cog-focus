@@ -25,11 +25,10 @@ OPENCODE_JSON="opencode.json"
 OPENCODE_JSONC="opencode.jsonc"
 
 # Template files (paths relative to cog-focus/) — never overwrite if already
-# present, since the user customizes these (goal, hot-memory, observations).
+# present, since the user customizes these (goal, observations).
 TEMPLATE_FILES=(
   "config.yaml"
   "roadmap.md"
-  "memory/hot-memory.md"
   "memory/observations.md"
   "memory/patterns.md"
   "memory/reflect-cursor.md"

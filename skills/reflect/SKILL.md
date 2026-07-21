@@ -37,7 +37,6 @@ Read on activation:
 - `cog-focus/memory/reflect-cursor.md` (session path + cursor)
 - `cog-focus/memory/observations.md`
 - `cog-focus/memory/patterns.md`
-- `cog-focus/memory/hot-memory.md`
 
 ## Process
 
@@ -69,7 +68,7 @@ Check if findings are already captured:
 - Learnings in `observations.md`?
 - Patterns distilled in `patterns.md`?
 
-**Consistency check**: Read `hot-memory.md`. For factual claims, verify against source files. Fix hot-memory if stale.
+**Consistency check**: For factual claims in `patterns.md`, verify against source files when in doubt. Fix stale rules.
 
 ### 3. Milestone & Goal Progress Assessment
 
@@ -77,7 +76,7 @@ Check if findings are already captured:
 - Is the current approach working? Rate: **on track** / **stalled** / **blocked**
 - Scan its Subtasks: what's checked, what's stalled, what's been added recently? Concrete signal for progress.
 - If stalled: suggest concrete next action or milestone revision
-- If the milestone seems done: flag it for completion and remember this — step 9 will prompt the user to pick what's next. Don't act on the transition yet.
+- If the milestone seems done: flag it for completion and remember this — step 8 will prompt the user to pick what's next. Don't act on the transition yet.
 
 **Goal-level check** (from `cog-focus/roadmap.md` Goal section, "Success Looks Like"):
 - For each criterion, check observations for evidence of progress
@@ -92,45 +91,36 @@ Report progress honestly. If there's no evidence of movement, say so.
 
 ### 4. Condensation Check
 
-Three promotion signals into `patterns.md`:
+Two promotion signals into `patterns.md`:
 
 - **Clustering**: clusters of 3+ entries on the same theme/tag in `observations.md` → distill into a pattern.
 - **Ref count**: individual observations with `| refs: N` where `N >= 3` → distill into a pattern even without a theme cluster. High refs mean the observation is actively load-bearing.
-- **Hot-memory stabilization**: scan `hot-memory.md` for lines that have generalized into timeless rules — claims that survive across milestones rather than describe project-state (the "carried priors" shape). Promote each into `patterns.md` and replace the hot-memory line with a one-line pointer (`see patterns.md: <rule>`) or remove it if the pattern covers it fully. This enforces hot-memory rule #4 ("promote when stable").
 
-For all paths:
+For both paths:
 - Add/update `cog-focus/memory/patterns.md`
-- Don't delete observations — they stay as raw record. Hot-memory lines, by contrast, get pointered or removed once promoted (hot-memory is volatile by design).
+- Don't delete observations — they stay as raw record.
 - **Patterns cap: 50 lines.** If near cap, compress (merge overlapping rules, drop examples)
 - Entries must be timeless rules — "what to do" not "what happened"
 - Skip if the insight is already covered by an existing pattern
 
 Reflect does not clear `| refs: N` suffixes — housekeeping handles that mechanical step.
 
-### 5. Hot-Memory Relevance
-
-Review `hot-memory.md`:
-- **Promote**: pattern heating up → add to hot-memory
-- **Demote**: item gone quiet (no references in 2+ weeks) → remove
-- Goal: hot-memory = what matters *right now*
-
-### 6. Detect Thread Candidates
+### 5. Detect Thread Candidates
 
 Scan observations for topics appearing across 3+ dates or spanning 2+ weeks. For each:
 - Check if a thread file already exists in `cog-focus/memory/`
 - If not, suggest: "Thread candidate: [topic] — [N] fragments across [date range]"
 - Don't auto-create threads — suggest them
 
-### 7. Act on Findings
+### 6. Act on Findings
 
 Don't just log — *fix things*.
 
 - New observations → append to `cog-focus/memory/observations.md` (max 5 per reflect pass, use `[meta]` tag)
 - Pattern updates → edit `cog-focus/memory/patterns.md`
 - Memory gaps → write to appropriate file
-- Stale hot-memory → prune
 
-### 8. Debrief
+### 7. Debrief
 
 Compose a concise summary:
 - *Milestone progress* — active milestone status + any suggested changes
@@ -141,7 +131,7 @@ Compose a concise summary:
 
 **IMPORTANT**: List every file you modified and summarize the changes. If you made no changes in a step, state that explicitly.
 
-### 9. Milestone Transition
+### 8. Milestone Transition
 
 If — and only if — step 3 flagged the active milestone as done, ask the user to choose what's next. Present three options:
 
@@ -158,11 +148,11 @@ On option 3, still append the completed milestone to `Completed` and clear `Acti
 
 If step 3 did not flag the milestone as done, skip this step entirely — no prompt, no edits.
 
-### 10. Update Timestamp
+### 9. Update Timestamp
 
 Update `last_reflect` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).
 
-### 11. Propose Commit
+### 10. Propose Commit
 
 If this reflect pass modified any files (see the Debrief list), ask the user whether to commit them. Phrase it as a single yes/no, and list the files so they know what's in scope.
 

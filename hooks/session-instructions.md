@@ -3,8 +3,7 @@
 ## On Session Start
 Read these files in order:
 1. `cog-focus/roadmap.md` — Goal (locked), active milestone, subtasks, untriaged
-2. `cog-focus/memory/hot-memory.md` — current state
-3. `cog-focus/memory/patterns.md` — learned heuristics
+2. `cog-focus/memory/patterns.md` — learned heuristics
 
 ## File Map
 
@@ -12,7 +11,6 @@ Read these files in order:
 cog-focus/
   roadmap.md            # Goal (locked) + Milestones + Subtasks + Untriaged inbox
   memory/
-    hot-memory.md       # <50 lines, rewrite freely
     observations.md     # Append-only + ref counter edits. Format: - YYYY-MM-DD [tags]: observation [ | refs: N ]
     patterns.md         # <50 lines, edit in place
     archive/            # Old data, managed by /housekeeping
@@ -29,7 +27,6 @@ Subtask format: `- [ ] task | pri:high/med/low | added:YYYY-MM-DD`
 ## Edit Patterns
 | File | Pattern |
 |------|---------|
-| hot-memory.md | Rewrite freely |
 | observations.md | Append only, except `\| refs: N` suffix edits (see Ref Counting below) |
 | roadmap.md | Edit milestones, Subtasks, and Untriaged in place. **Goal section is locked** — don't edit without explicit user request. |
 | patterns.md | Edit in place |
@@ -49,11 +46,10 @@ Write when:
 - A decision was made and the rationale isn't obvious from the diff (`[decision]`)
 - Something surprised you in a way that generalizes beyond the current task (`[insight]`)
 - A specific attempt failed in a way worth remembering (`[failed]`); a distilled negative rule (`[anti-pattern]`)
-- A claim in `hot-memory.md` was confirmed or contradicted (`[hot-ref]` / `[hot-stale]`)
 
 Skip when:
-- It's a status update ("X installed", "Y shipped", "milestone done") — belongs in commits or `hot-memory.md`
-- It restates something already in `patterns.md` or `hot-memory.md` — bump `| refs: N` instead (see Ref Counting)
+- It's a status update ("X installed", "Y shipped", "milestone done") — belongs in commits
+- It restates something already in `patterns.md` — bump `| refs: N` instead (see Ref Counting)
 - It's project-state that won't matter once the next milestone lands
 
 **Length: ≤4 lines.** If you need more, write a design doc under `docs/` and let the observation point at it. Multi-paragraph entries indicate it's a spec, not an observation.
@@ -66,11 +62,3 @@ Observations carry an optional `| refs: N` suffix indicating how often they've b
 - If you **independently re-discover the same insight**, append a new entry — don't bump. Re-observations feed the duplicate-clustering signal.
 
 High-ref observations are promotion candidates for `patterns.md` (handled by `/reflect` and `/housekeeping`).
-
-## Hot-Memory Feedback (observations.md)
-Claims in `hot-memory.md` are only useful if they shape work. Tag observations to signal the connection:
-
-- `[hot-ref]` — this observation confirms, restates, or applies a claim in `hot-memory.md`.
-- `[hot-stale]` — this observation contradicts or supersedes a claim in `hot-memory.md`.
-
-Tags stack with existing ones (e.g. `[decision, hot-stale]`). Apply only when the link is real — don't retrofit to inflate the signal.

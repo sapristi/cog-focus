@@ -1,6 +1,6 @@
 ---
 name: housekeeping
-description: Memory maintenance — archives old data, prunes hot-memory, triages untriaged tasks, surfaces stale items, rebuilds archive index
+description: Memory maintenance — archives old data, triages untriaged tasks, surfaces stale items, rebuilds archive index
 user-invocable: true
 ---
 
@@ -26,20 +26,22 @@ If a sub-agent reports `paused` or `failed`, surface the line and ask the user b
 
 Read `last_reflect` from `cog-focus/config.yaml`. If it is `never` or older than 1 day (compared to today's date), invoke the `/reflect` skill **before** continuing. Otherwise skip to §1.
 
-Division of labor: reflect owns content decisions (observation condensation, hot-memory relevance, progress assessment). Housekeeping enforces mechanical discipline on top — size caps, archival by count, task triage, archive index.
+Division of labor: reflect owns content decisions (observation condensation, progress assessment). Housekeeping enforces mechanical discipline on top — size caps, archival by count, task triage, archive index.
 
 ## 1. Sync Headers from Template
 
 Plugin templates evolve (tag legend, format hints, length caps). Refresh project memory headers to match the current template; content stays untouched.
 
-For each of `observations.md`, `patterns.md`, `hot-memory.md`:
+For each of `observations.md` and `patterns.md`:
 1. Read the template at `${CLAUDE_PLUGIN_ROOT}/template/cog-focus/memory/<file>`.
 2. Compare the leading block — the `# Title` line plus any `<!-- ... -->` comment lines immediately following, up to the first non-comment, non-blank line.
 3. If different, replace that leading block in the project file. Preserve everything below.
 
 Also sync the comment lines under `## Completed` in `roadmap.md` against `${CLAUDE_PLUGIN_ROOT}/template/cog-focus/roadmap.md`: the consecutive `<!-- ... -->` lines immediately under the `## Completed` heading. Don't touch any other section of roadmap.md.
 
-Skip silently if `$CLAUDE_PLUGIN_ROOT` is unset or a template file is missing. Note any header changes in the debrief.
+**Obsolete files**: list files in `cog-focus/memory/` (excluding `archive/`, thread files, and `reflect-cursor.md`) that have no counterpart in `${CLAUDE_PLUGIN_ROOT}/template/cog-focus/memory/` — leftovers from removed architecture (e.g. `hot-memory.md`). For each, show its content briefly and ask the user whether to delete it; salvage anything with lasting value into `observations.md` first. Never delete without confirmation.
+
+Skip silently if `$CLAUDE_PLUGIN_ROOT` is unset or a template file is missing. Note any header changes and deletions in the debrief.
 
 ## 2. Compress Completed Entries (sub-agent)
 
@@ -55,17 +57,7 @@ If ≤50, skip. Otherwise dispatch:
 
 > Read `cog-focus/memory/observations.md`. The file is an append-only log of `- YYYY-MM-DD [tags]: ...` entries. Move all entries except the 30 most recent into year-grouped archive files at `cog-focus/memory/archive/observations-YYYY.md` (grouped by each entry's `YYYY-` prefix). When appending to an existing archive file, add at the end. When creating a new one, prepend a `# Year YYYY observations` title. Then remove the moved entries from the main file, leaving the header block intact. Touch only `cog-focus/memory/observations.md` and the archive files for the years involved. Return one line: `archived <N> entries to <comma-separated archive files>` or `nothing to archive`.
 
-## 4. Enforce Hot-Memory Cap
-
-Reflect already demoted stale items by relevance. Check line count of `cog-focus/memory/hot-memory.md`. If still >50 lines, apply blunt cap in this order:
-
-1. **Resolved items** — ~~strikethrough~~, "DONE", "RESOLVED"
-2. **Past events** — dates already occurred
-3. **Low-signal entries** — FYI items with no action or deadline
-
-Entries with lasting value → append to `observations.md`. Never silently delete — note removals in debrief.
-
-## 5. Promote High-Ref Observations
+## 4. Promote High-Ref Observations
 
 Scan `cog-focus/memory/observations.md` for entries with `| refs: N` where `N >= 3`.
 
@@ -75,7 +67,7 @@ For each qualifying entry:
 
 The observation text itself stays untouched. This step is additive to reflect's condensation (which also considers ref counts) — it catches high-ref accumulation when reflect isn't stale enough to trigger.
 
-## 6. Triage & Surface Tasks
+## 5. Triage & Surface Tasks
 
 Read `cog-focus/roadmap.md`.
 
@@ -88,7 +80,7 @@ Move confirmed items into their milestone's `Subtasks` block (create the block i
 
 **Surface stale items** — open subtasks (anywhere in roadmap.md) older than 2 weeks: list with age and suggest a next action. Be direct.
 
-## 7. Rebuild Archive Index (sub-agent)
+## 6. Rebuild Archive Index (sub-agent)
 
 Dispatch:
 
@@ -105,7 +97,7 @@ Dispatch:
 >
 > Touch only `cog-focus/memory/archive/index.md`. Return one line: `index rebuilt: <N> archive files indexed` or `no archive files`.
 
-## 8. Debrief
+## 7. Debrief
 
 Summarize:
 - What was archived/pruned/compressed (sub-agent results)
@@ -116,6 +108,6 @@ Summarize:
 
 Keep it concise. List every file modified.
 
-## 9. Update Timestamp
+## 8. Update Timestamp
 
 Update `last_housekeeping` in `cog-focus/config.yaml` to the current date/time (ISO 8601, e.g. `2026-04-05T14:30:00`).
